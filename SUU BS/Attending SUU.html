@@ -18,26 +18,27 @@
             text-align: center;
         }
     </style>
+    <script type="text/javascript" src="attending1.js"></script>
 </head>
 <body>
     <form>
-        <label>First Name<input type="text"> </label>
+        <label>First Name<input type="text" id="fName">  </label>
         <br>
-        <label>Last Name<input type="text"> </label>
+        <label>Last Name<input type="text" id="lName"> </label>
         <br>
-        <label>Move in Date<input type="date"> </label>
+        <label>Move in Date<input type="date" id="date"> </label>
         <br>
         <label>Which major are you planing on selecting?
         <select>
-            <option>TODO for the majors</option>
+            <option id="majors">TODO for the majors</option>
         </select>
         </label>
         <br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="submit">
         <br>
-        <input type="reset" value="Reset">
+        <input type="reset" value="Reset" id="reset">
         <br>
-        <input type="button" value="Random Student">
+        <input type="button" value="Random Student" id="random">
     </form>
     <p>SUU Red is the following Hex value: #DB0000</p>
     <p>SUU Black is the following Hex value: #000000</p>
@@ -140,4 +141,5 @@ Willigar
 Wiser</p>
 
 
-</body></html>
+</body>
+</html>
