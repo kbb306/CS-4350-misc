@@ -59,7 +59,7 @@ var majors = ["Accounting",
 "Sociology",
 "Software Development",
 "Sports",
-"Theatre"]
+"Theatre"];
 
 var fNames = ["Ainslee",
 "Alysa",
@@ -75,7 +75,7 @@ var fNames = ["Ainslee",
 "Karyn",
 "Nolana",
 "Perrine",
-"Rachel"]
+"Rachel"];
 
 var lNames = ["Cartmill",
 "Cherrington",
@@ -92,6 +92,13 @@ var lNames = ["Cartmill",
 "Stinebaugh",
 "Willigar",
 "Wiser"
-]
+];
 
-var majorsel = document.getElementById("majors")
+var majorsel = document.getElementById("majors");
+for(var i=0; i<majors.length; i++) {
+    var major = majors[i];
+    var entry = document.createElement("option");
+    entry.textContent = major;
+    entry.value = major;
+    majorsel.appendChild(entry);
+}
