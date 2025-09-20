@@ -112,5 +112,3 @@ function randomize() {
     name2.value = lNames[Math.random.floor()]
 }
 
-
-func
