@@ -102,3 +102,12 @@ for(var i=0; i<majors.length; i++) {
     entry.value = major;
     majorsel.appendChild(entry);
 }
+
+
+name1 = document.getElementById("fName")
+name2 = document.getElementById("lName")
+
+function randomize(slot1,slot2,val1,val2) {
+    slot1.value = val1[Math.random.floor()]
+    slot2.value = val2[Math.random.floor()]
+}
