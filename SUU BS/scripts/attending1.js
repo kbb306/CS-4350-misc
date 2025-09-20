@@ -107,8 +107,9 @@ for(var i=0; i<majors.length; i++) {
 name1 = document.getElementById("fName")
 name2 = document.getElementById("lName")
 
+
 function randomize() {
-    name1.value = fNames[Math.random.floor()]
-    name2.value = lNames[Math.random.floor()]
+    name1.value = fNames[Math.floor(Math.random()*fNames.length)]
+    name2.value = lNames[Math.floor(Math.random()*lnames.length)]
 }
 
