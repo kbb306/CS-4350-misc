@@ -1,7 +1,7 @@
 document.getElementById("date").min = new Date().toISOString().split("T")[0];
 // Found this here: https://stackoverflow.com/questions/74585566/set-date-input-fields-minimum-date-to-today
 
-var majors = ["Accounting",
+majors = ["Accounting",
 "Agriculture",
 "Anthropology",
 "Area/Group Studies",
@@ -61,7 +61,7 @@ var majors = ["Accounting",
 "Sports",
 "Theatre"];
 
-var fNames = ["Ainslee",
+fNames = ["Ainslee",
 "Alysa",
 "Berrie",
 "Cami",
@@ -77,7 +77,7 @@ var fNames = ["Ainslee",
 "Perrine",
 "Rachel"];
 
-var lNames = ["Cartmill",
+lNames = ["Cartmill",
 "Cherrington",
 "Ellington",
 "Gascho",
@@ -107,7 +107,10 @@ for(var i=0; i<majors.length; i++) {
 name1 = document.getElementById("fName")
 name2 = document.getElementById("lName")
 
-function randomize(slot1,slot2,val1,val2) {
-    slot1.value = val1[Math.random.floor()]
-    slot2.value = val2[Math.random.floor()]
+function randomize() {
+    name1.value = fNames[Math.random.floor()]
+    name2.value = lNames[Math.random.floor()]
 }
+
+
+func
