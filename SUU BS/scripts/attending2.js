@@ -7,3 +7,15 @@ for (var i = 0; i<Hat.length; i++) {
     option.value = House;
     Hogwarts.appendChild(option);
 }
+
+var characters = [ "Harry Potter",
+        "Hermione Granger",
+        "Albus Dumbledore",
+        "Cho Chang",
+        "Luna Lovegood",
+        "Draco Malfoy",
+        "A character not listed"]
+for (var i = 0; i < characters.length; i++) {
+    who = characters[i];
+    
+}
