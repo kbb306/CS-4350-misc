@@ -4,34 +4,52 @@
     
     <title>Attending SUU More Info</title>
         <style>
-        /* Internal CSS  */
         h1 {
-            color: green;
+            color: #db0000;
             font-size: 50px;
             text-align: center;
         }
 
         div {
-            color: blue;
+            background-color: #db0000;
             font-size: 25px;
             line-height: 1.5;
             text-align: center;
         }
+
+        body{
+    background-color: #e7e7e7;
+    margin-left: auto auto;
+        }
+    html{
+        background-color: #000000;
+        }
+
+    form {
+        margin-top: auto ;
+        padding-top: 10%;
+        text-align: center;
+    }
+
+    label br {padding-inline: 8%;}
+    input {
+        padding-left: 3px;
+    }
     </style>
 </head>
 <body>
-    <form>
+    <form action="AttendingSUUEvenMore.html">
         <input type="hidden">
         <p>SUU Checklist:</p>
-        <label>I completed registration<input type="checkbox"> </label>
+        <label>I completed registration<input type="checkbox" id="registerCheck"> </label>
         <br>
-        <label>I found my dorm room<input type="checkbox"> </label>
+        <label>I found my dorm room<input type="checkbox" id="dormCheck"> </label>
         <br>
-        <label>I found the cafeteria<input type="checkbox"> </label>
+        <label>I found the cafeteria<input type="checkbox" id="foodCheck"> </label>
         <br>
-        <label>I made a friend<input type="checkbox"> </label>
+        <label>I made a friend<input type="checkbox" id="friendCheck"> </label>
         <br>
-        <label>I paid my tuition<input type="checkbox"> </label>
+        <label>I paid my tuition<input type="checkbox" id="tuitionCheck"> </label>
         <br>
         I have selected the following degree<br>
         <input type="radio" name="degree" id="CS" value="CS">
@@ -49,28 +67,17 @@
         <input type="radio" name="degree" id="NotListed" value="NotListed">
         <label for="NotListed">My degree is not listed</label><br>
         <label>My Hogwarts House is:
-        <select>
-            <option>TODO for the Hogwarts House</option>
+        <select id="Hogwarts">
+
         </select>
         </label>
         <br>
-        <br>Note use JavaScript to add these as options for this select item:
-        Gryffindor
-        Hufflepuff
-        Ravenclaw
-        Slytherin
-
+        <br>
         <br>
         My Favorite Harry Potter Character is:<br>
         <input type="radio">
         <br>Note use JavaScript to add these as options for this radio button group:
-        Harry Potter
-        Hermione Granger
-        Albus Dumbledore
-        Cho Chang
-        Luna Lovegood
-        Draco Malfoy
-        A character not listed
+       
 
         <br>
         <input type="submit" value="Submit">
@@ -81,5 +88,5 @@
 
     <input type="text" value="Completion Score: 0" disabled="">
 
-
+<script src="scripts/attending2.js"></script>
 </body></html>
