@@ -38,18 +38,18 @@
     </style>
 </head>
 <body>
-    <form action="AttendingSUUEvenMore.html">
-        <input type="hidden">
-        <p>SUU Checklist:</p>
-        <label>I completed registration<input type="checkbox" id="registerCheck"> </label>
+    <form action="AttendingSUUEvenMore.html" id="checklist">
+        <input type="hidden" name="programmer" value="Kyler Belshaw" >
+        <h1>SUU Checklist:</h1>
+        <label>I completed registration<input type="checkbox" id="registerCheck" onclick="addpoints(5)"> </label>
         <br>
-        <label>I found my dorm room<input type="checkbox" id="dormCheck"> </label>
+        <label>I found my dorm room<input type="checkbox" id="dormCheck" onclick="addpoints(5)"> </label>
         <br>
-        <label>I found the cafeteria<input type="checkbox" id="foodCheck"> </label>
+        <label>I found the cafeteria<input type="checkbox" id="foodCheck" onclick="addpoints(5)"> </label>
         <br>
-        <label>I made a friend<input type="checkbox" id="friendCheck"> </label>
+        <label>I made a friend<input type="checkbox" id="friendCheck" onclick="addpoints(5)"> </label>
         <br>
-        <label>I paid my tuition<input type="checkbox" id="tuitionCheck"> </label>
+        <label>I paid my tuition<input type="checkbox" id="tuitionCheck" onclick="addpoints(5)"> </label>
         <br>
         I have selected the following degree<br>
         <input type="radio" name="degree" id="CS" value="CS">
@@ -74,16 +74,17 @@
         <br>
         <br>
         <br>
-        My Favorite Harry Potter Character is:<br>
-        <input type="radio">
-        <br>Note use JavaScript to add these as options for this radio button group:
-       
+        <div id="chars">
+            My Favorite Harry Potter Character is:<br>
+            
+        
 
-        <br>
-        <input type="submit" value="Submit">
-        <br>
-        <input type="reset" value="Reset">
-        <br>
+            <br>
+            <input type="submit" value="Submit">
+            <br>
+            <input type="reset" value="Reset">
+            <br>
+        </div>
     </form>
 
     <input type="text" value="Completion Score: 0" disabled="">
