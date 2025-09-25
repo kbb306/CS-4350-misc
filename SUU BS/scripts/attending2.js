@@ -6,7 +6,6 @@ for (var i = 0; i<Hat.length; i++) {
     var option = document.createElement("option");
     option.textContent = House;
     option.value = House;
-    option.setAttribute("onclick","addpoints(5)");
     Hogwarts.appendChild(option);
 }
 
@@ -76,6 +75,20 @@ function resetpoints() {
     total = 0
     var output = document.getElementById("total");
     output.innerHTML = "Total Points: " + total;
+}
+
+function dropdowncalc() {
+    var dropdown = document.getElementById("Hogwarts")
+    var House = dropdown.value
+    if (already = false) {
+    if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
+        addpoints(5)
+        var already = true
+    }
+else{
+    addpoints(-5)
+}}
+
 }
 
 
