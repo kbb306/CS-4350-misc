@@ -84,15 +84,17 @@ function dropdowncalc() {
     var dropdown = document.getElementById("Hogwarts")
     var House = dropdown.value
     if (already = false) {
-        if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(str(House))) {
+        if (House in ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"]) {
             addpoints(5)
             already = true
         }
-    
-    }
-    else{
+
+        else{
             addpoints(-5)
         }
+    
+    }
+    
 }
 
 
