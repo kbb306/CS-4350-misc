@@ -11,7 +11,7 @@
         }
 
         div {
-            background-color: #db0000;
+            background-color: #e7e7e7;
             font-size: 25px;
             line-height: 1.5;
             text-align: center;
@@ -52,23 +52,23 @@
         <label>I paid my tuition<input type="checkbox" id="tuitionCheck" onclick="addpoints(5)"> </label>
         <br>
         I have selected the following degree<br>
-        <input type="radio" name="degree" id="CS" value="CS">
+        <input type="radio" name="degree" id="CS" value="CS" onclick="addpoints(20)" name="">
         <label for="CS">BS in Computer Science</label><br>
          
-        <input type="radio" name="degree" id="Cyber" value="Cyber">
+        <input type="radio" name="degree" id="Cyber" value="Cyber" onclick="addpoints(20)">
         <label for="Cyber">BS in Cybersecurity</label><br>
         
-        <input type="radio" name="degree" id="CSCert" value="CSCert">
+        <input type="radio" name="degree" id="CSCert" value="CSCert" onclick="addpoints(20)">
         <label for="CSCert">Computer Science Certificate</label><br>
         
-        <input type="radio" name="degree" id="CyberMasters" value="CyberMasters">
+        <input type="radio" name="degree" id="CyberMasters" value="CyberMasters" onclick="addpoints(20)">
         <label for="CyberMasters">Cybersecurity Masters</label><br>
         
-        <input type="radio" name="degree" id="NotListed" value="NotListed">
+        <input type="radio" name="degree" id="NotListed" value="NotListed" onclick="addpoints(20)">
         <label for="NotListed">My degree is not listed</label><br>
         <label>My Hogwarts House is:
         <select id="Hogwarts">
-
+            <option>Select a House</option>
         </select>
         </label>
         <br>
@@ -77,17 +77,15 @@
         <div id="chars">
             My Favorite Harry Potter Character is:<br>
             
-        
-
-            <br>
+        </div>
+        <br>
             <input type="submit" value="Submit">
             <br>
             <input type="reset" value="Reset">
             <br>
-        </div>
     </form>
 
-    <input type="text" value="Completion Score: 0" disabled="">
+    <p id="total">Total Points: 0</p>
 
 <script src="scripts/attending2.js"></script>
 </body></html>

@@ -1,3 +1,4 @@
+total = 0
 var Hogwarts = document.getElementById("Hogwarts");
 var Hat = ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"];
 for (var i = 0; i<Hat.length; i++) {
@@ -18,17 +19,21 @@ var characters = [ "Harry Potter",
         "A character not listed"]
 
 var formsection = document.getElementById("chars")
-for (var i = 0; i < characters.length; i++) {
+for (i in characters) {
     who = characters[i];
     var newbutton = document.createElement("input");
+    var newlabel = document.createElement("label")
     newbutton.type = "radio"
-    newbutton.textContent = who;
-    newbutton.name = who
+    newbutton.setAttribute("name","character")
     newbutton.id = who
     newbutton.value = who;
-    newbutton.onclick= "addpoints(10)";
+    newbutton.setAttribute("onclick","addpoints(5)");
+    newlabel.for = who
+    newlabel.textContent = who
+    x = document.createElement("br");
     formsection.append(newbutton);
-    
+    formsection.append(newlabel);
+    formsection.append(x);
 }
 
 function getFirstForm() {
@@ -62,5 +67,8 @@ major.setAttribute("type","hidden");
 major.setAttribute("value",results[3]);
 
 function addpoints(points) {
+    total = total + points;
 
+var output = document.getElementById("total");
+output.innerHTML = "Total Points: " + total;
 }
