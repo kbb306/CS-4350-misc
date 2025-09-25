@@ -88,11 +88,11 @@ function dropdowncalc() {
             addpoints(5)
             already = true
         }
-    else{
-        addpoints(-5)
+    
     }
-}
-
+    else{
+            addpoints(-5)
+        }
 }
 
 
