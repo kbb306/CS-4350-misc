@@ -71,13 +71,15 @@ function addpoints(points) {
     output.innerHTML = "Total Points: " + total;
 
 }
+already = false
 function resetpoints() {
     total = 0
     var output = document.getElementById("total");
     output.innerHTML = "Total Points: " + total;
+    already = false
 }
 
-already = false
+
 function dropdowncalc() {
     var dropdown = document.getElementById("Hogwarts")
     var House = dropdown.value
