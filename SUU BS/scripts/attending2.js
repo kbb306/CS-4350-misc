@@ -6,7 +6,7 @@ for (var i = 0; i<Hat.length; i++) {
     var option = document.createElement("option");
     option.textContent = House;
     option.value = House;
-    option.onclick= "addpoints(5)";
+    option.setAttribute("onclick","addpoints(5)");
     Hogwarts.appendChild(option);
 }
 
@@ -68,7 +68,14 @@ major.setAttribute("value",results[3]);
 
 function addpoints(points) {
     total = total + points;
+    var output = document.getElementById("total");
+    output.innerHTML = "Total Points: " + total;
 
-var output = document.getElementById("total");
-output.innerHTML = "Total Points: " + total;
 }
+function resetpoints() {
+    total = 0
+    var output = document.getElementById("total");
+    output.innerHTML = "Total Points: " + total;
+}
+
+
