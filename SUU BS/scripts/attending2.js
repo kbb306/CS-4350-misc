@@ -1,6 +1,7 @@
 total = 0
 already = false
 already2 = false
+already3 = false
 var Hogwarts = document.getElementById("Hogwarts");
 var Hat = ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"];
 for (var i = 0; i<Hat.length; i++) {
@@ -28,7 +29,7 @@ for (i in characters) {
     newbutton.setAttribute("name","character")
     newbutton.id = who
     newbutton.value = who;
-    newbutton.setAttribute("onclick","buttoncheck()");
+    newbutton.setAttribute("onchange","tally(this)");
     newlabel.for = who
     newlabel.textContent = who
     x = document.createElement("br");
@@ -70,63 +71,56 @@ major.setAttribute("value",results[3]);
 function addpoints(points) {
     total = total + points;
     var output = document.getElementById("total");
-    output.innerHTML = "Total Points: " + total;
+    output.innerHTML = "Total Points: " + total +"/60";
 
 }
 
 
 
-function resetpoints() {
-    total = 0
-    var output = document.getElementById("total");
-    output.innerHTML = "Total Points: " + total;
-    already = false
-    already2 = false
-}
-
-
-function dropdowncalc() {
-    var dropdown = document.getElementById("Hogwarts")
-    var House = dropdown.value
-    console.log("House is", House)
-    if (already == false) {
-        if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
-            addpoints(5);
-            already = true;
-            return;
-        }
-
-    }   
-}
-
-function buttoncheck(caller) {
-    var toAdd = 0
+function tally(caller) {
     if (caller.type == "checkbox") {
-        toAdd = 5;
-    }
-    else if (caller.type == "radio") {
-        if (caller.name == "degree") {
-            toAdd = 20;
-            
+        if (caller.checked) {
+            addpoints(5)
         }
-        else if (caller.name == "character"){
-            toAdd = 10;
+        else {
+            addpoints(-5)
         }
-    
     }
-
-    if (caller.checked) {
+    else if (caller.name == "degree") {
+        if (already == false) {
+            addpoints(20)
+            already = true
+        }
+    }
+    else if (caller.name == "character") {
         if (already2 == false) {
-            if (caller.type == "radio") {
-                already2 = true
-            }
-            addpoints(toAdd);
-        
+            addpoints(10)
+            already2 = true
         }
     }
-    else {
-        addpoints(-toAdd);
+    else if (caller.id == "Hogwarts") {
+        var House = caller.value
+        console.log("House is", House)
+        if (already3 == false) {
+            if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
+                addpoints(5);
+                already3 = true;
+                
+            }
+        }
+        else if (House == "Select a House") {
+            addpoints(-5)
+            already3 = false
+            }
+          
+    }
+    else if (caller.type == "reset") {
+        total = 0
+        var output = document.getElementById("total");
+        output.innerHTML = "Total Points: " + total;
+        already = false
+        already2 = false
+        already3 = false
     }
 }
-
 
