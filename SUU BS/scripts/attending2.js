@@ -1,5 +1,6 @@
 total = 0
 already = false
+already2 = false
 var Hogwarts = document.getElementById("Hogwarts");
 var Hat = ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"];
 for (var i = 0; i<Hat.length; i++) {
@@ -105,14 +106,22 @@ function buttoncheck(caller) {
     else if (caller.type == "radio") {
         if (caller.name == "degree") {
             toAdd = 20;
+            
         }
         else if (caller.name == "character"){
             toAdd = 10;
         }
     
     }
+
     if (caller.checked) {
-        addpoints(toAdd);
+        if (already2 == false) {
+            if (caller.type == "radio") {
+                already2 = true
+            }
+            addpoints(toAdd);
+        
+        }
     }
     else {
         addpoints(-toAdd);
