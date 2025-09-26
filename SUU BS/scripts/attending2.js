@@ -71,7 +71,7 @@ major.setAttribute("value",results[3]);
 function addpoints(points) {
     total = total + points;
     var output = document.getElementById("total");
-    output.innerHTML = "Total Points: " + total;
+    output.innerHTML = "Total Points: " + total +"/60";
 
 }
 
