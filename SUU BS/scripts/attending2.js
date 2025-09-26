@@ -105,7 +105,7 @@ function tally(caller) {
             if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
                 addpoints(5);
                 already3 = true;
-                return;
+                
             }
         }
         else if (House == "Select a House") {
