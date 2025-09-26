@@ -96,13 +96,13 @@ function tally(caller) {
             addpoints(-5)
         }
     }
-    else if (caller.name == degree) {
+    else if (caller.name == "degree") {
         if (already == false) {
             addpoints(20)
             already = true
         }
     }
-    else if (caller.name == characters) {
+    else if (caller.name == "characters") {
 
     }
     else if (caller.id == "Hogwarts") {
