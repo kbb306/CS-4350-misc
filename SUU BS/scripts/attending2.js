@@ -103,7 +103,10 @@ function tally(caller) {
         }
     }
     else if (caller.name == "characters") {
-
+        if (already2 == false) {
+            addpoints(10)
+            already2 = true
+        }
     }
     else if (caller.id == "Hogwarts") {
         var House = caller.value
