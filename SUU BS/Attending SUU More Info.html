@@ -52,19 +52,19 @@
         <label>I paid my tuition<input type="checkbox" id="tuitionCheck" onchange="buttoncheck(this)" > </label>
         <br>
         I have selected the following degree<br>
-        <input type="radio" name="degree" id="CS" value="CS" onclick="addpoints(20)" >
+        <input type="radio" name="degree" id="CS" value="CS" onchange="buttoncheck(this)" >
         <label for="CS">BS in Computer Science</label><br>
          
-        <input type="radio" name="degree" id="Cyber" value="Cyber" onclick="addpoints(20)" >
+        <input type="radio" name="degree" id="Cyber" value="Cyber" onchange="buttoncheck(this)" >
         <label for="Cyber">BS in Cybersecurity</label><br>
         
-        <input type="radio" name="degree" id="CSCert" value="CSCert" onclick="addpoints(20)" >
+        <input type="radio" name="degree" id="CSCert" value="CSCert" onchange="buttoncheck(this)" >
         <label for="CSCert">Computer Science Certificate</label><br>
         
-        <input type="radio" name="degree" id="CyberMasters" value="CyberMasters" onclick="addpoints(20)" >
+        <input type="radio" name="degree" id="CyberMasters" value="CyberMasters" onchange="buttoncheck(this)" >
         <label for="CyberMasters">Cybersecurity Masters</label><br>
         
-        <input type="radio" name="degree" id="NotListed" value="NotListed" onclick="addpoints(20)" >
+        <input type="radio" name="degree" id="NotListed" value="NotListed" onchange="buttoncheck(this)" >
         <label for="NotListed">My degree is not listed</label><br>
         <label>My Hogwarts House is:
         <select id="Hogwarts" onchange="dropdowncalc()">
