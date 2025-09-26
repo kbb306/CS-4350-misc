@@ -96,7 +96,10 @@ function tally(caller) {
         }
     }
     else if (caller.name == degree) {
-
+        if (already2 == false) {
+            addpoints(20)
+            already2 = true
+        }
     }
     else if (caller.name == characters) {
 
