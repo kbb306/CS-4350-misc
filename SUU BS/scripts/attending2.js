@@ -29,7 +29,7 @@ for (i in characters) {
     newbutton.setAttribute("name","character")
     newbutton.id = who
     newbutton.value = who;
-    newbutton.setAttribute("onchange","tally()");
+    newbutton.setAttribute("onchange","tally(this)");
     newlabel.for = who
     newlabel.textContent = who
     x = document.createElement("br");
