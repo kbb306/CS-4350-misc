@@ -86,7 +86,7 @@ function resetpoints() {
 function dropdowncalc() {
     var dropdown = document.getElementById("Hogwarts")
     var House = dropdown.value
-    if (already = false) {
+    if (already == false) {
         if (House in ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"]) {
             addpoints(5)
             already = true
