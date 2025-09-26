@@ -84,19 +84,7 @@ function resetpoints() {
 }
 
 
-function dropdowncalc() {
-    var dropdown = document.getElementById("Hogwarts")
-    var House = dropdown.value
-    console.log("House is", House)
-    if (already == false) {
-        if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
-            addpoints(5);
-            already = true;
-            return;
-        }
 
-    }   
-}
 
 function tally(caller) {
     if (caller.type == "checkbox") {
@@ -114,7 +102,19 @@ function tally(caller) {
 
     }
     else if (caller.id == "Hogwarts") {
-        
+        var House = caller.value
+        console.log("House is", House)
+        if (already == false) {
+            if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
+                addpoints(5);
+                already = true;
+                return;
+            }
+        else if (House == "Select a House") {
+            addpoints(-5)
+            already = false
+        }
+        }   
     }
 }
 
