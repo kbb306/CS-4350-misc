@@ -77,11 +77,6 @@ function addpoints(points) {
 
 
 
-
-
-
-
-
 function tally(caller) {
     if (caller.type == "checkbox") {
         if (caller.checked) {
