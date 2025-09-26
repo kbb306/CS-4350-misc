@@ -97,4 +97,13 @@ function dropdowncalc() {
     }   
 }
 
+function buttoncheck() {
+    if (this.checked) {
+        addpoints(5)
+    }
+    else {
+        addpoints(-5)
+    }
+}
+
 
