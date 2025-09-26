@@ -90,10 +90,12 @@ function dropdowncalc() {
         if (House in ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"]) {
             addpoints(5)
             already = true
+            return
         }
 
         else{
             addpoints(-5)
+            return
         }
     
     }
