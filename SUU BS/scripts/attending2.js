@@ -1,4 +1,5 @@
 total = 0
+already = false
 var Hogwarts = document.getElementById("Hogwarts");
 var Hat = ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"];
 for (var i = 0; i<Hat.length; i++) {
@@ -71,7 +72,9 @@ function addpoints(points) {
     output.innerHTML = "Total Points: " + total;
 
 }
-already = false
+
+
+
 function resetpoints() {
     total = 0
     var output = document.getElementById("total");
