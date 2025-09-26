@@ -110,11 +110,12 @@ function tally(caller) {
                 already = true;
                 return;
             }
+        }
         else if (House == "Select a House") {
             addpoints(-5)
             already = false
-        }
-        }   
+            }
+          
     }
 }
 
