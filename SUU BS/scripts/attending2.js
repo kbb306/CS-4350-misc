@@ -81,6 +81,7 @@ function resetpoints() {
     var output = document.getElementById("total");
     output.innerHTML = "Total Points: " + total;
     already = false
+    already2 = false
 }
 
 
