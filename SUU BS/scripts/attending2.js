@@ -77,12 +77,7 @@ function addpoints(points) {
 
 
 
-function resetpoints() {
-    total = 0
-    var output = document.getElementById("total");
-    output.innerHTML = "Total Points: " + total;
-    already = false
-}
+
 
 
 
@@ -123,6 +118,14 @@ function tally(caller) {
             already3 = false
             }
           
+    }
+    else if (caller.type == "reset") {
+        total = 0
+        var output = document.getElementById("total");
+        output.innerHTML = "Total Points: " + total;
+        already = false
+        already2 = false
+        already3 = false
     }
 }
 
