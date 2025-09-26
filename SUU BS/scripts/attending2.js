@@ -1,6 +1,7 @@
 total = 0
 already = false
 already2 = false
+already3 = false
 var Hogwarts = document.getElementById("Hogwarts");
 var Hat = ["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"];
 for (var i = 0; i<Hat.length; i++) {
@@ -96,9 +97,9 @@ function tally(caller) {
         }
     }
     else if (caller.name == degree) {
-        if (already2 == false) {
+        if (already == false) {
             addpoints(20)
-            already2 = true
+            already = true
         }
     }
     else if (caller.name == characters) {
@@ -107,16 +108,16 @@ function tally(caller) {
     else if (caller.id == "Hogwarts") {
         var House = caller.value
         console.log("House is", House)
-        if (already == false) {
+        if (already3 == false) {
             if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
                 addpoints(5);
-                already = true;
+                already3 = true;
                 return;
             }
         }
         else if (House == "Select a House") {
             addpoints(-5)
-            already = false
+            already3 = false
             }
           
     }
