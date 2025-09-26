@@ -92,7 +92,7 @@ function tally(caller) {
             already = true
         }
     }
-    else if (caller.name == "characters") {
+    else if (caller.name == "character") {
         if (already2 == false) {
             addpoints(10)
             already2 = true
