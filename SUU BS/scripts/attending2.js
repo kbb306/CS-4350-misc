@@ -27,7 +27,7 @@ for (i in characters) {
     newbutton.setAttribute("name","character")
     newbutton.id = who
     newbutton.value = who;
-    newbutton.setAttribute("onclick","addpoints(5)");
+    newbutton.setAttribute("onclick","buttoncheck()");
     newlabel.for = who
     newlabel.textContent = who
     x = document.createElement("br");
@@ -89,20 +89,33 @@ function dropdowncalc() {
     console.log("House is", House)
     if (already == false) {
         if (["Gryffindor","Hufflepuff","Slytherin","Ravenclaw"].includes(House)) {
-            addpoints(5)
-            already = true
-            return 
+            addpoints(5);
+            already = true;
+            return;
         }
 
     }   
 }
 
-function buttoncheck() {
-    if (this.checked) {
-        addpoints(5)
+function buttoncheck(caller) {
+    var toAdd = 0
+    if (caller.type == "checkbox") {
+        toAdd = 5;
+    }
+    else if (caller.type == "radio") {
+        if (caller.name == "degree") {
+            toAdd = 20;
+        }
+        else if (caller.name == "character"){
+            toAdd = 10;
+        }
+    
+    }
+    if (caller.checked) {
+        addpoints(toAdd);
     }
     else {
-        addpoints(-5)
+        addpoints(-toAdd);
     }
 }
 
