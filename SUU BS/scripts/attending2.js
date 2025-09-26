@@ -98,34 +98,23 @@ function dropdowncalc() {
     }   
 }
 
-function buttoncheck(caller) {
-    var toAdd = 0
+function tally(caller) {
     if (caller.type == "checkbox") {
-        toAdd = 5;
-    }
-    else if (caller.type == "radio") {
-        if (caller.name == "degree") {
-            toAdd = 20;
-            
+        if (caller.checked) {
+            addpoints(5)
         }
-        else if (caller.name == "character"){
-            toAdd = 10;
+        else {
+            addpoints(-5)
         }
-    
     }
+    else if (caller.name == degree) {
 
-    if (caller.checked) {
-        if (already2 == false) {
-            if (caller.type == "radio") {
-                already2 = true
-            }
-            addpoints(toAdd);
-        
-        }
     }
-    else {
-        addpoints(-toAdd);
+    else if (caller.name == characters) {
+
+    }
+    else if (caller.id == "Hogwarts") {
+        
     }
 }
-
 
