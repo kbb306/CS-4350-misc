@@ -11,3 +11,23 @@ function getPrevForms() {
         current.append(x)
 
 }
+
+var month = getElementById("favday")
+month.setAttribute("max",new Date().getDate())
+
+function checkemail() {
+    for ( var form in document.forms) {
+        for (var element in form) {
+            if (element.type == "email") {
+                var suffix = element.search(element.pattern)
+                if (suffix >= 0) {
+                    var OK = true
+                }
+                else {
+                    OK = false
+                }
+            }
+        }
+            
+    }
+}

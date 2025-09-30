@@ -48,9 +48,9 @@
      <br>
      <label>What day was your favorite this month?<input type="number" min="1" id="favday" ></label>
      <br>
-     <label>Enter your school email (.edu): <input type="email" id="schoolmail"></label>
+     <label>Enter your school email (.edu): <input type="email" id="schoolmail" pattern="/\.edu$/"></label>
      <br>
-     <label>Enter your personal email (not .edu): <input type="email" id="personalmail"></label>
+     <label>Enter your personal email (not .edu): <input type="email" id="personalmail" pattern=".*(?<!edu)$"></label>
      <br>
      <input type="submit" value="Submit">
         <br>
