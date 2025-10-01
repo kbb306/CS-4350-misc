@@ -24,8 +24,10 @@ function checkemail() {
                     var OK = true
                 }
                 else {
+                    alert("Inavid email address at:",element.parentElement)
                     OK = false
                 }
+                return OK
             }
         }
             
