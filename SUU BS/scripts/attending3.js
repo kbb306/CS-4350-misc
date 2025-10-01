@@ -21,7 +21,7 @@ day.setAttribute("max",today.getDate())
 function checkemail() {
     var OK = true
     for ( var form in document.forms) {
-        for (var element in form) {
+        for (var element in form.elements) {
             if (element.type == "email") {
                 var suffix = element.search(RegExp(element.reggie))
                 if (suffix >= 0) {
