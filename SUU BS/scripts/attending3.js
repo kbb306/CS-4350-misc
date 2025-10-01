@@ -13,7 +13,8 @@ function getPrevForms() {
 }
 
 var month = getElementById("favday")
-month.setAttribute("max",new Date().getDate())
+ today = new Date().getDate()
+month.setAttribute("max",today)
 
 function checkemail() {
     for ( var form in document.forms) {
