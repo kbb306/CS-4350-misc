@@ -49,24 +49,29 @@ function getFirstForm() {
 }
 
 results = getFirstForm()
+var form = document.getElementById("checklist")
 var fname = document.createElement("input");
 fname.setAttribute("type","hidden");
 fname.setAttribute("value",results[0]);
 fname.setAttribute("name","fname");
+form.appendChild(fname)
 
 var lname = document.createElement("input");
 lname.setAttribute("type","hidden");
 lname.setAttribute("value",results[1]);
 lname.setAttribute("name","lname");
+form.appendChild(lname)
 
-var date = document.createElement("date");
+var date = document.createElement("input");
 date.setAttribute("type","hidden");
 date.setAttribute("value",results[2]);
 date.setAttribute("name","date");
+form.appendChild(date)
 
 var major = document.createElement("input");
 major.setAttribute("type","hidden");
 major.setAttribute("value",results[3]);
+form.appendChild(major)
 
 function addpoints(points) {
     total = total + points;

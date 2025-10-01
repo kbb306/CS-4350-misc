@@ -38,18 +38,18 @@
     </style>
 </head>
 <body>
-    <form action="AttendingSUUEvenMore.html" id="checklist">
+    <form action="Attending SUU Even More Info.html" id="checklist">
         <input type="hidden" name="programmer" value="Kyler Belshaw" >
         <h1>SUU Checklist:</h1>
-        <label>I completed registration<input type="checkbox" id="registerCheck" onchange="tally(this)" > </label>
+        <label>I completed registration<input type="checkbox" name="registerCheck" id="registerCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I found my dorm room<input type="checkbox" id="dormCheck" onchange="tally(this)" > </label>
+        <label>I found my dorm room<input type="checkbox" name="dormCheck" id= "dormCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I found the cafeteria<input type="checkbox" id="foodCheck" onchange="tally(this)" > </label>
+        <label>I found the cafeteria<input type="checkbox"  name="foodCheck" id="foodCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I made a friend<input type="checkbox" id="friendCheck" onchange="tally(this)" > </label>
+        <label>I made a friend<input type="checkbox" name="friendCheck" id="friendCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I paid my tuition<input type="checkbox" id="tuitionCheck" onchange="tally(this)" > </label>
+        <label>I paid my tuition<input type="checkbox" name = "tuitionCheck" id="tuitionCheck" onchange="tally(this)" > </label>
         <br>
         I have selected the following degree<br>
         <input type="radio" name="degree" id="CS" value="CS" onchange="tally(this)" >
