@@ -42,8 +42,15 @@ function check() {
         }
         
     }
+    else {
+        if (!input.value) {
+            alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
+            OK = false
+        }
+        }
+    }
    }
    return OK
-}
+
        
 getPrevForms()
