@@ -24,6 +24,7 @@ function checkemail() {
      var form = document.getElementById("evenmore")
         if (typeof(form) != HTMLFormElement) {
             console.log("Error")
+            return false
             }
             var elements = form.elements
         for (var i = 0, element; element = elements[i++];) {
