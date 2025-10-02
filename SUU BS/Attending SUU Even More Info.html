@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <form id="evenmore" onsubmit="return checkemail()">
+    <form id="evenmore" onsubmit="return check()">
      <label> Birthday (month and year):<input type="month" id="birthday"></label>
      <br>
      <strong>Note:</strong> type="month" is not supported in Firefox, Safari, or Internet Explorer 11.
@@ -49,12 +49,12 @@
      <br>
      <label>What day was your favorite this month?<input type="number" min="1" name="favday" id="favday" ></label>
      <br>
-     <label>Enter your school email (.edu): <input type="email"  name = "schoolmail" id="schoolmail" reggie="\.edu$"></label>
+     <label>Enter your school email (.edu): <input type="email"  name = "schoolmail" id="schoolmail" ></label>
      <br>
-     <label>Enter your personal email (not .edu): <input type="email" name="personalmail" id="personalmail" reggie=".*\.(?!edu$)"></label>
+     <label>Enter your personal email (not .edu): <input type="email" name="personalmail" id="personalmail"></label>
      <br>
      <input type="submit" value="Submit">
-     <input type="button" onclick="checkemail()" value="Check">
+     <input type="button" onclick="check()" value="Check">
         <br>
         <input type="reset" value="Reset">
         <br>

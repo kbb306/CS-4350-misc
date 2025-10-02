@@ -18,33 +18,32 @@ var today = new Date()
 console.log(today)
 day.setAttribute("max",today.getDate())
 
-function checkemail() {
+function check() {
+   var thing = Array.from(document.getElementsByTagName("input"))
+   for (i in thing) {
+    input = thing[i]
     var OK = true
-    console.log("Checking....")
-    var form = document.getElementById("evenmore")
-    var elements = form.elements
-    for (var i = 0, element; element = elements[i++];) {
-        if (element.type == "label") {
-             var input = element.child
+    var result = 0
+    if (input.type == "email") {
+        if (input.id == "schoolmail") {
+            result = input.value.search(/.edu$/)
+        }
+        else if (input.id == "personalmail") {
+            result = input.value.search(/.*\.(?!edu$)/)
+            
+        }
+        if (result == -1) {
+            alert("Invalid input at "+input.parentElement.innerHTML)
+            OK = false
+            console.log("No match.")
         }
         else {
-            input = element
+            console.log("Match!")
         }
-        if (input.type == "email") {
-            email = input.value
-            var result = email.search(RegExp(element.reggie,"i"))
-            console.log(result)
-                if (result == -1) {
-                    console.log("No Match!")
-                    OK = false
-                }
-
-                else {
-                    console.log("Match!")
-                }
-        }
+        
     }
-    return OK
+   }
+   return OK
 }
        
 getPrevForms()
