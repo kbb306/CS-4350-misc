@@ -20,23 +20,29 @@ day.setAttribute("max",today.getDate())
 
 function checkemail() {
     var OK = true
-    for ( var form in document.forms) {
-        for (var element in form.elements) {
+    console.log("Checking....")
+     var form = document.getElementById("evenmore")
+        if (typeof(form) != HTMLFormElement) {
+            console.log("Error")
+            }
+            var elements = form.elements
+        for (var i = 0, element; element = elements[i++];) {
             if (element.type == "email") {
-                var suffix = element.search(RegExp(element.reggie))
-                if (suffix >= 0) {
-                    console.log("Congratulations!")
+                email = element.value
+                var result = email.search(RegExp(element.reggie,"i"))
+                if (result >= 0) {
+                    console.log("Yay!")
                 }
                 else {
                     alert("Inavid email address at:",element.parentElement)
                     OK = false
-                    console.log("Can't you follow basic directions?")
+                    console.log("Nay!")
                 }
                 
             }
-        }
-            
-    }
+        
+        } 
+    
     return OK
-}
+        }
 getPrevForms()
