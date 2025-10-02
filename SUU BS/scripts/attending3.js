@@ -24,34 +24,36 @@ function check() {
     input = thing[i]
     var OK = true
     var result = 0
-    if (input.type == "email") {
-        if (input.id == "schoolmail") {
-            result = input.value.search(/.edu$/)
-        }
-        else if (input.id == "personalmail") {
-            result = input.value.search(/.*\.(?!edu$)/)
+    if (input.type != "hidden"){
+        if (input.type == "email") {
+            if (input.id == "schoolmail") {
+                result = input.value.search(/.edu$/)
+            }
+            else if (input.id == "personalmail") {
+                result = input.value.search(/.*\.(?!edu$)/)
+                
+            }
+            if (result == -1) {
+                alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
+                OK = false
+                console.log("No match.")
+            }
+            else {
+                console.log("Match!")
+            }
             
         }
-        if (result == -1) {
-            alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
-            OK = false
-            console.log("No match.")
-        }
         else {
-            console.log("Match!")
+            if (!input.value) {
+                alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
+                OK = false
+            }
+            }
         }
-        
-    }
-    else {
-        if (!input.value) {
-            alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
-            OK = false
-        }
-        }
-    }
-    return OK
+    
    }
-   
+   return OK
+}
 
        
 getPrevForms()
