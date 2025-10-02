@@ -49,8 +49,9 @@ function check() {
         }
         }
     }
+    return OK
    }
-   return OK
+   
 
        
 getPrevForms()
