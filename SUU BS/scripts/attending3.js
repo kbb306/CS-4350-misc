@@ -33,7 +33,7 @@ function check() {
             
         }
         if (result == -1) {
-            alert("Invalid input at "+input.parentElement.innerHTML)
+            alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
             OK = false
             console.log("No match.")
         }
