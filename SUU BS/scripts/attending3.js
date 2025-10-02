@@ -20,9 +20,9 @@ day.setAttribute("max",today.getDate())
 
 function check() {
    var thing = Array.from(document.getElementsByTagName("input"))
+   var OK = true
    for (i in thing) {
     input = thing[i]
-    var OK = true
     var result = 0
     if (input.type != "hidden"){
         if (input.type == "email") {
