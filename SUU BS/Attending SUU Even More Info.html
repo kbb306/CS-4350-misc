@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://lumos.csis.suu.edu/~barkern/CS_4350/AttendingSUUEvenMore.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Attending SUU Even More Info</title>
+        <style>
+            /* Internal CSS  */
+            h1 {
+                color: #db0000;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            div {
+                background-color: #e7e7e7;
+                font-size: 25px;
+                line-height: 1.5;
+                text-align: center;
+            }
+
+            body{
+        background-color: #e7e7e7;
+        margin-left: auto;
+            }
+        html{
+            background-color: #000000;
+            }
+
+        form {
+            margin-top: auto ;
+            padding-top: 10%;
+            text-align: center;
+            color: #db0000;
+        }
+
+        label br {padding-inline: 8%;}
+        input {
+            padding-left: 3px;
+        }
+    </style>
+</head>
+<body>
+    <form id="evenmore" onsubmit="return check()" action="AttendingSUUPage4.html">
+     <label> Birthday (month and year):<input type="month" id="birthday"></label>
+     <br>
+     <strong>Note:</strong> type="month" is not supported in Firefox, Safari, or Internet Explorer 11.
+     <br>
+      <label>Select a color you enjoy: <input type="color" value="#ff0000"  name="favcolor" id="favcolor"></label>
+     <br>
+     <label>What day was your favorite this month?<input type="number" min="1" name="favday" id="favday" ></label>
+     <br>
+     <label>Enter your school email (.edu): <input type="email"  name = "schoolmail" id="schoolmail" ></label>
+     <br>
+     <label>Enter your personal email (not .edu): <input type="email" name="personalmail" id="personalmail"></label>
+     <br>
+     <input type="submit" value="Submit">
+        <br>
+        <input type="reset" value="Reset">
+        <br>
+    </form>
+    
+<script src="scripts/attending3.js"></script>
+</body></html>

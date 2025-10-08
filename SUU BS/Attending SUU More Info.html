@@ -11,7 +11,7 @@
         }
 
         div {
-            background-color: #db0000;
+            background-color: #e7e7e7;
             font-size: 25px;
             line-height: 1.5;
             text-align: center;
@@ -19,7 +19,7 @@
 
         body{
     background-color: #e7e7e7;
-    margin-left: auto auto;
+    margin-left: auto;
         }
     html{
         background-color: #000000;
@@ -38,37 +38,37 @@
     </style>
 </head>
 <body>
-    <form action="AttendingSUUEvenMore.html" id="checklist">
+    <form action="Attending SUU Even More Info.html" id="checklist">
         <input type="hidden" name="programmer" value="Kyler Belshaw" >
         <h1>SUU Checklist:</h1>
-        <label>I completed registration<input type="checkbox" id="registerCheck" onclick="addpoints(5)"> </label>
+        <label>I completed registration<input type="checkbox" name="registerCheck" id="registerCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I found my dorm room<input type="checkbox" id="dormCheck" onclick="addpoints(5)"> </label>
+        <label>I found my dorm room<input type="checkbox" name="dormCheck" id= "dormCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I found the cafeteria<input type="checkbox" id="foodCheck" onclick="addpoints(5)"> </label>
+        <label>I found the cafeteria<input type="checkbox"  name="foodCheck" id="foodCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I made a friend<input type="checkbox" id="friendCheck" onclick="addpoints(5)"> </label>
+        <label>I made a friend<input type="checkbox" name="friendCheck" id="friendCheck" onchange="tally(this)" > </label>
         <br>
-        <label>I paid my tuition<input type="checkbox" id="tuitionCheck" onclick="addpoints(5)"> </label>
+        <label>I paid my tuition<input type="checkbox" name = "tuitionCheck" id="tuitionCheck" onchange="tally(this)" > </label>
         <br>
         I have selected the following degree<br>
-        <input type="radio" name="degree" id="CS" value="CS">
+        <input type="radio" name="degree" id="CS" value="CS" onchange="tally(this)" >
         <label for="CS">BS in Computer Science</label><br>
          
-        <input type="radio" name="degree" id="Cyber" value="Cyber">
+        <input type="radio" name="degree" id="Cyber" value="Cyber" onchange="tally(this)" >
         <label for="Cyber">BS in Cybersecurity</label><br>
         
-        <input type="radio" name="degree" id="CSCert" value="CSCert">
+        <input type="radio" name="degree" id="CSCert" value="CSCert" onchange="tally(this)" >
         <label for="CSCert">Computer Science Certificate</label><br>
         
-        <input type="radio" name="degree" id="CyberMasters" value="CyberMasters">
+        <input type="radio" name="degree" id="CyberMasters" value="CyberMasters" onchange="tally(this)" >
         <label for="CyberMasters">Cybersecurity Masters</label><br>
         
-        <input type="radio" name="degree" id="NotListed" value="NotListed">
+        <input type="radio" name="degree" id="NotListed" value="NotListed" onchange="tally(this)" >
         <label for="NotListed">My degree is not listed</label><br>
         <label>My Hogwarts House is:
-        <select id="Hogwarts">
-
+        <select id="Hogwarts" onchange="tally(this)">
+            <option>Select a House</option>
         </select>
         </label>
         <br>
@@ -77,17 +77,15 @@
         <div id="chars">
             My Favorite Harry Potter Character is:<br>
             
-        
-
-            <br>
+        </div>
+        <br>
             <input type="submit" value="Submit">
             <br>
-            <input type="reset" value="Reset">
+            <input type="reset" value="Reset" onclick="tally(this)">
             <br>
-        </div>
     </form>
 
-    <input type="text" value="Completion Score: 0" disabled="">
+    <p id="total">Total Points: 0/60</p>
 
 <script src="scripts/attending2.js"></script>
 </body></html>
