@@ -1,11 +1,12 @@
 prev = window.location.search
-prevdata = URLSearchParams(prev)
+prevdata = new URLSearchParams(prev)
 var fname = prevdata.get("firstname")
 var lname = prevdata.get("lastname")
 fullname = document.getElementsByTagName("h2")
 fullname.innerHTML = "Welcome " + fname + " " + lname
 
 function suboption(caller) {
+    console.log(caller)
     var options = []
     var sweet = ["Caramel: A classic choice, often with added chocolate, peanuts, or cookie crumbs",
                  "Chocolate: Chocolate drizzles or flavors like chocolate peanut butter",
@@ -39,7 +40,7 @@ function suboption(caller) {
         options = savory
     }
     else if (caller.id = "spicyFlavors") {
-        options = spicetang
+        options = spicytang
     }
     else if (caller.id = "uniqueFlavors") {
         options = unique
@@ -47,10 +48,11 @@ function suboption(caller) {
 
     for (var i = 0; i < options.length; i++) {
         listel = options[i]
+        console.log(listel)
         option = document.createElement("option")
         option.textContent = listel
         option.value = listel.split(":")[0]
-        options.append(option)
+        menu.appendChild(option)
     }
 }
 
