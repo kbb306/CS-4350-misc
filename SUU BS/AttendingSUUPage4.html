@@ -19,9 +19,10 @@
             }
 
             body{
-        background-color: #e7e7e7;
-        margin-left: auto;
+            background-color: #e7e7e7;
+            margin-left: auto;
             }
+
         html{
             background-color: #000000;
             }
@@ -33,7 +34,9 @@
             color: #db0000;
         }
 
-        label br {padding-inline: 8%;}
+        label br {padding-inline: 8%;
+        }
+
         input {
             padding-left: 3px;
         }
@@ -41,19 +44,19 @@
 </head>
 <body>
     <form>
-     <label>Secret Code: <input type="password"></label>
+     <label>Secret Code: <input type="password" id="password"></label>
      <br>
-     <label>Verify Secret Code: <input type="password"></label>
+     <label>Verify Secret Code: <input type="password" id="checkpassword"></label>
      <br>
-     <label>How would you rate your current website experience? <input type="range" min="0" max="100"></label>
+     <label>How would you rate your current website experience? <input type="range" min="0" max="100" id="rating"></label>
      <br>
-     <label>Select a time you would like to see an advisor:<input type="time"></label>
+     <label>Select a time you would like to see an advisor:<input type="time" id="advisor"></label>
      <br>
-     <label>What is your favorite webpage: <input type="url"></label>
+     <label>What is your favorite webpage: <input type="url" id="favpage"></label>
      <br>
      &nbsp;&nbsp;(Depending on browser support, the url field can be automatically validated when submitted.)
      <br>
-     <label>What is your favorite week of the year?<input type="week"></label>
+     <label>What is your favorite week of the year?<input type="week" id="favweek"></label>
      <br>
      &nbsp;&nbsp;(<strong>Note:</strong> type="week" is not supported in Firefox, Safari or Internet Explorer 11.)     
      <br>
