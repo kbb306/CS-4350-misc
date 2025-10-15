@@ -20,9 +20,9 @@ day.setAttribute("max",today.getDate())
 
 function check() {
    var thing = Array.from(document.getElementsByTagName("input"))
+   var OK = true
    for (i in thing) {
     input = thing[i]
-    var OK = true
     var result = 0
     if (input.type != "hidden"){
         if (input.type == "email") {
@@ -34,7 +34,9 @@ function check() {
                 
             }
             if (result == -1) {
-                alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
+                if (OK == true) {
+                    alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
+                }
                 OK = false
                 console.log("No match.")
             }
@@ -45,7 +47,9 @@ function check() {
         }
         else {
             if (!input.value) {
+                if (OK == true) {
                 alert("Invalid input at "+(input.parentElement.innerHTML.split("<"))[0])
+                }
                 OK = false
             }
             }

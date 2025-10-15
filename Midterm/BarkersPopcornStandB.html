@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://lumos.csis.suu.edu/~barkern/CS_4350/BarkersPopcornStandB.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Barker's Popcorn Stand</title>
+        
+    </head>
+
+<body>
+
+<h1>Barker's Popcorn Stand</h1>
+<h2>Welcome {Submitted Name Here}</h2>
+
+<form action="BarkersPopcornStandB.html" onsubmit="return check()">
+<img src="images/corina-rainer-9FDI-_E29fk-unsplash.jpg" width="450">
+<p>Please enter an amount (between 1-9)</p>
+<p><label>Amount <input type="text" name="amount" onblur="check()">  </label></p>
+<p>Please select a flavor type</p>
+<p>
+<input type="radio" id="sweetFlavors" name="flavorGroup" value="sweetFlavors" onchange="suboption(this)">
+<label for="sweetFlavors">Sweet Flavors</label><br>
+<input type="radio" id="savoryFlavors" name="flavorGroup" value="savoryFlavors" onchange="suboption(this)">
+<label for="savoryFlavors">Savory Flavors</label><br>
+<input type="radio" id="spicyFlavors" name="flavorGroup" value="spicyFlavors" onchange="suboption(this)">
+<label for="spicyFlavors">Spicy &amp; Tangy Flavors</label><br>
+<input type="radio" id="uniqueFlavors" name="flavorGroup" value="uniqueFlavors" onchange="suboption(this)">
+<label for="uniqueFlavors">Unique Combinations</label><br>
+</p>
+
+<p>
+    <label for="theFlavorSelect">Select your suboption</label><br>
+    <select>
+        <option id="theFlavorSelect" value="Carmel">Caramel: A classic choice, often with added chocolate, peanuts, or cookie crumbs.</option>
+    </select>
+</p><p> 
+<p></p>
+<p></p>
+        <input type="submit" value="Submit">
+<p></p>
+
+</form>
+<script src="scripts/b.js"></script>
+</body></html>
