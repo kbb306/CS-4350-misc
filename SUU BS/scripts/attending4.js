@@ -1,4 +1,5 @@
 OK = false
+already = false
 
 function getPrevForms() {
     var prevs = window.location.search
@@ -20,13 +21,19 @@ function passwordcheck() {
     var password = document.getElementById("password")
     var repeat = document.getElementById("checkpassword")
     if (!password.value) {
+        if (!already) {
         alert("Enter password in both fields")
+        }
         OK = false
+        already = true
     }
 
     else if (!repeat.value) {
+        if (!already) {
         alert("Enter password in both fields")
+        }
         OK = false
+        already = true
     }
 
     else {
