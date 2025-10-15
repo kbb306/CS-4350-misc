@@ -43,7 +43,7 @@
     </style>
 </head>
 <body>
-    <form id="form4" onsubmit="return validate(this)">
+    <form id="form4" onsubmit="return validate(this)" action="StudentInformation.html">
      <label>Secret Code: <input type="password" id="password" name="password" onblur="passwordcheck()"></label>
      <br>
      <label>Verify Secret Code: <input type="password" id="checkpassword" name="checkpassword" onblur="passwordcheck()"></label>
@@ -60,7 +60,7 @@
      <br>
      &nbsp;&nbsp;(<strong>Note:</strong> type="week" is not supported in Firefox, Safari or Internet Explorer 11.)     
      <br>
-     <input type="submit" value="Submit" action="StudentInformation.html">
+     <input type="submit" value="Submit" >
         <br>
         <input type="reset" value="Reset">
         <br>
