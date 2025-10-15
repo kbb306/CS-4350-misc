@@ -44,19 +44,19 @@
 </head>
 <body>
     <form id="form4" onsubmit="return validate(this)">
-     <label>Secret Code: <input type="password" id="password" onblur="passwordcheck()"></label>
+     <label>Secret Code: <input type="password" id="password" name="password" onblur="passwordcheck()"></label>
      <br>
-     <label>Verify Secret Code: <input type="password" id="checkpassword" onblur="passwordcheck()"></label>
+     <label>Verify Secret Code: <input type="password" id="checkpassword" name="checkpassword" onblur="passwordcheck()"></label>
      <br>
-     <label>How would you rate your current website experience? <input type="range" min="0" max="100" id="rating"></label>
+     <label>How would you rate your current website experience? <input type="range" min="0" max="100" id="rating" name="rating"></label>
      <br>
-     <label>Select a time you would like to see an advisor:<input type="time" id="advisor"></label>
+     <label>Select a time you would like to see an advisor:<input type="time" id="advisor" name="advisortime"></label>
      <br>
-     <label>What is your favorite webpage: <input type="url" id="favpage"></label>
+     <label>What is your favorite webpage: <input type="url" id="favpage" name="favpage"></label>
      <br>
      &nbsp;&nbsp;(Depending on browser support, the url field can be automatically validated when submitted.)
      <br>
-     <label>What is your favorite week of the year?<input type="week" id="favweek"></label>
+     <label>What is your favorite week of the year?<input type="week" id="favweek" name="favpage"></label>
      <br>
      &nbsp;&nbsp;(<strong>Note:</strong> type="week" is not supported in Firefox, Safari or Internet Explorer 11.)     
      <br>
