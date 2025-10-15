@@ -47,7 +47,7 @@ function validate(thing,index) {
 function check() {
     form = Array.from(document.getElementById("form4").elements)
     console.log(form)
-    form.forEach(validate(item,index))
+    form.forEach(validate())
     console.log(OK)
     return OK
 }
