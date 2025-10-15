@@ -42,7 +42,6 @@ function passwordcheck() {
 }
 
 function validate(form) {
-    console.log()
     for (var i= 0;i<form;i++) {
     if (thing.type == "label") {
         thing = thing.firstElementChild
