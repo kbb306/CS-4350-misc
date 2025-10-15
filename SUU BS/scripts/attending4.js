@@ -15,9 +15,35 @@ function getPrevForms() {
 
 }
 
-function validate(thing,index) {
-    var passwords = []
-    
+function passwordcheck() {
+    var OK = false
+    var password = document.getElementById("password")
+    var repeat = document.getElementById("checkpassword")
+    if (!password.value) {
+        alert("Enter password in both fields")
+        OK = false
+    }
+
+    else if (!repeat.value) {
+        alert("Enter password in both fields")
+        OK = false
+    }
+
+    else {
+        if (password.value === repeat.value) {
+            OK = true
+        }
+        else {
+            alert("Passwords do not match!")
+            OK = false
+        }
+    }
+    return OK
+}
+
+function validate(form) {
+    console.log()
+    for (var i= 0;i<form;i++) {
     if (thing.type == "label") {
         thing = thing.firstElementChild
     }
@@ -27,28 +53,9 @@ function validate(thing,index) {
         OK = false
     }
     
-    if (thing.type == "password"){
-        passwords.push(thing)
-    }
     
-    for (var i, j=0; i < passwords.length; i++) {
-        j = i + 1
-        if (passwords[i].value === passwords[j].value) {
-            OK = true
-        }
-        else {
-            alert ("Passwords do not match!")
-            OK = false
-        }
-
     }
-}
-
-function check() {
-    form = Array.from(document.getElementById("form4").elements)
-    console.log(form)
-    form.forEach(validate())
-    console.log(OK)
+    OK = passwordcheck()
     return OK
 }
 

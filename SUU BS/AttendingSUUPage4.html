@@ -43,7 +43,7 @@
     </style>
 </head>
 <body>
-    <form id="form4" onsubmit="return check()">
+    <form id="form4" onsubmit="return validate(this)">
      <label>Secret Code: <input type="password" id="password"></label>
      <br>
      <label>Verify Secret Code: <input type="password" id="checkpassword"></label>
@@ -64,6 +64,7 @@
         <br>
         <input type="reset" value="Reset">
         <br>
+        <input type="button" value="Check" onclick="check()"> 
     </form>
 
 <script src="scripts/attending4.js"></script>
