@@ -64,5 +64,5 @@ function validate(form) {
     OK = passwordcheck()
     return OK
 }
-
+getPrevForms()
 
