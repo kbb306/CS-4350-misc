@@ -63,6 +63,16 @@ function passwordcheck() {
     return OK
 }
 
+function hasher() {
+password = document.getElementById("password")
+random = Math.random()*10000000000000
+scramble = String(cyrb53(password,random))
+hash = document.createElement("input")
+hash.setAttribute("type","hidden")
+hash.setAttribute("name","password")
+hash.setAttribute("value",scramble)
+return hash}
+
 function validate(form) {
     for (var i= 0;i<form;i++) {
     if (thing.type == "label") {
@@ -77,14 +87,12 @@ function validate(form) {
     
     }
     OK = passwordcheck()
+    if (OK) {
+        form.appendChild(hasher())
+    }
     return OK
 }
 getPrevForms()
-password = document.getElementById("password")
-random = Math.random()*Document.getElementById("form4").length
-hash = document.createElement("input")
-hash.setAttribute("type","hidden")
-hash.setAttribute("name","password")
-hash.setAttribute("value",String(cyrb53(password,random)))
-form.appendChild(hash)
+
+
 
