@@ -77,16 +77,14 @@ function validate(form) {
     
     }
     OK = passwordcheck()
-    if (OK) {
-        password = document.getElementById("password")
-        random = Math.random()*Document.getElementById("form4").length
-        hash = document.createElement("input")
-        hash.setAttribute("type","hidden")
-        hash.setAttribute("name","password")
-        hash.setAttribute("value",cyrb53(password,random))
-        form.appendChild(hash)
-    }
     return OK
 }
 getPrevForms()
+password = document.getElementById("password")
+random = Math.random()*Document.getElementById("form4").length
+hash = document.createElement("input")
+hash.setAttribute("type","hidden")
+hash.setAttribute("name","password")
+hash.setAttribute("value",String(cyrb53(password,random)))
+form.appendChild(hash)
 
