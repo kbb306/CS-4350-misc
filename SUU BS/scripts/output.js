@@ -2,10 +2,10 @@ function dataDump() {
     var previous = window.location.search
     var toParse = new URLSearchParams(previous)
     for (var [key,value] of toParse) {
-        console.log(key)
-        place = document.getElementById(key)
+        place = document.getElementById(String(key))
+        console.log(place.id,key,value)
         prefix = place.innerHTML
-        place.innerHTML = prefix + value
+        place.innerHTML = String(prefix + value)
     }
 }
 dataDump()
