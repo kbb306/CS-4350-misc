@@ -12,7 +12,11 @@ function dataDump() {
             console.log("programmed by "+ value)
         }
         else if (key.search(RegExp("Check$")) > -1) {
-            
+            if (value == "On") {
+                place = document.getElementById(String(key))
+                prefix = place.innerHTML
+                place.innerHTML = prefix + " Check"
+            }
         }
         else {
             place = document.getElementById(String(key))
