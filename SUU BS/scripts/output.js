@@ -3,7 +3,9 @@ function dataDump() {
     var fullname = []
     var toParse = new URLSearchParams(previous)
     for (var [key,value] of toParse) {
-        if (key.search(RegExp("/name$/") != -1)) {
+        console.log(key,value)
+        if (key.search(RegExp("name$")) < -1) {
+            
             fullname.push([key,value])
         }
         else if (key == "programmer") {
@@ -11,7 +13,6 @@ function dataDump() {
         }
         else {
             place = document.getElementById(String(key))
-            console.log(place.id,key,value)
             prefix = place.innerHTML
             place.innerHTML = String(prefix + value)
     }
