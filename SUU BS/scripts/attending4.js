@@ -84,7 +84,7 @@ function validate(form) {
         hash.setAttribute("type","hidden")
         hash.setAttribute("name","password")
         hash.setAttribute("value",cyrb53(password,random))
-
+        form.appendChild(hash)
     }
     return OK
 }
