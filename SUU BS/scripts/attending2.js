@@ -71,6 +71,7 @@ form.appendChild(date)
 var major = document.createElement("input");
 major.setAttribute("type","hidden");
 major.setAttribute("value",results[3]);
+major.setAttribute("name","major")
 form.appendChild(major)
 
 function addpoints(points) {
