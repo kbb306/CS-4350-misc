@@ -1,13 +1,16 @@
 prev = window.location.search
 prevdata = new URLSearchParams(prev)
-var fname = prevdata.get("firstname")
-var lname = prevdata.get("lastname")
-fullname = document.getElementsByTagName("h2")
-fullname.innerHTML = "Welcome " + fname + " " + lname
+var fname = prevdata.get("firstName")
+var lname = prevdata.get("lastName")
+fullname = document.getElementsByTagName("h2")[0]
+fullname.innerHTML = ("Welcome " + fname + " " + lname)
 
 function suboption(caller) {
+    menu = document.getElementById("theFlavorSelect")
+    caller.setAttribute()
+    menu.innerHTML = ""
     console.log(caller)
-    var options = []
+    var options = ["Select an option first"]
     var sweet = ["Caramel: A classic choice, often with added chocolate, peanuts, or cookie crumbs",
                  "Chocolate: Chocolate drizzles or flavors like chocolate peanut butter",
                  "Cinnamon Sugar: A sweet and simple coating.",
@@ -16,7 +19,7 @@ function suboption(caller) {
     ]
 
     var savory = ["Cheesy: White cheddar, nacho cheddar, Parmesan, and even truffle cheese.",
-                  "Herb &amp; Garlic: Rosemary Parmesan, Italian seasoning, dill pickle, and garlic powder.",
+                  "Herb & Garlic: Rosemary Parmesan, Italian seasoning, dill pickle, and garlic powder.",
                   "Umami Flavors: Nutritional yeast, bacon, and soy sauce.",
                   "Specialty Savory: Everything bagel seasoning, furikake, and even ketchup flavor."
     ]
@@ -31,8 +34,7 @@ function suboption(caller) {
                   'Themed Flavors: Such as "Cheeseburger," "Birthday Cake," or even seasonal gingerbread and pumpkin spice.'
     ]
 
-    menu = document.getElementById("theFlavorSelect")
-    menu.innerHTML = ""
+    
     if (caller.id == "sweetFlavors") {
         options = sweet
     }
@@ -50,8 +52,9 @@ function suboption(caller) {
         listel = options[i]
         console.log(listel)
         option = document.createElement("option")
-        option.textContent = listel
+        option.textContent = String(listel)
         option.value = listel.split(":")[0]
+        console.log(option.value)
         menu.appendChild(option)
     }
 }
@@ -59,7 +62,7 @@ function suboption(caller) {
 function check() {
     var OK = false
     var buttons = 0
-    form = Array.Arrayfrom(document.forms)[0]
+    form = document.forms[0]
     for (var i = 0; i < form.length; i++) {
         if (form[i].type == "button") {
             if (form[i].checked) {
@@ -68,11 +71,11 @@ function check() {
         }
         else if (form[i].type == "text") {
             regex = form[i].value.search(/[1-9]/)
-            if (regex == 1) {
+            if (regex == 0) {
                 OK = true
             }
             else {
-                alert("Please enter a number 0-9")
+                alert("Please enter a number 1-9")
                 OK = false
             }
         }
