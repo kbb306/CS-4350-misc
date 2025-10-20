@@ -4,44 +4,67 @@
     
     <title>Attending SUU Even More Info</title>
         <style>
-        /* Internal CSS  */
-        h1 {
-            color: green;
-            font-size: 50px;
+      /* Internal CSS  */
+            h1 {
+                color: #db0000;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            div {
+                background-color: #e7e7e7;
+                font-size: 25px;
+                line-height: 1.5;
+                text-align: center;
+            }
+
+            body{
+            background-color: #e7e7e7;
+            margin-left: auto;
+            }
+
+        html{
+            background-color: #000000;
+            }
+
+        form {
+            margin-top: auto ;
+            padding-top: 10%;
             text-align: center;
+            color: #db0000;
         }
 
-        div {
-            color: blue;
-            font-size: 25px;
-            line-height: 1.5;
-            text-align: center;
+        label br {padding-inline: 8%;
+        }
+
+        input {
+            padding-left: 3px;
         }
     </style>
 </head>
 <body>
-    <form>
-     <label>Secret Code: <input type="password"></label>
+    <form id="form4" onsubmit="return validate(this)" action="StudentInformation.html">
+     <label>Secret Code: <input type="password" id="password" ></label>
      <br>
-     <label>Verify Secret Code: <input type="password"></label>
+     <label>Verify Secret Code: <input type="password" id="checkpassword" onblur="passwordcheck()"></label>
      <br>
-     <label>How would you rate your current website experience? <input type="range" min="0" max="100"></label>
+     <label>How would you rate your current website experience? <input type="range" min="0" max="100" id="rating" name="rating"></label>
      <br>
-     <label>Select a time you would like to see an advisor:<input type="time"></label>
+     <label>Select a time you would like to see an advisor:<input type="time" id="advisor" name="advisortime"></label>
      <br>
-     <label>What is your favorite webpage: <input type="url"></label>
+     <label>What is your favorite webpage: <input type="url" id="favpage" name="favpage"></label>
      <br>
      &nbsp;&nbsp;(Depending on browser support, the url field can be automatically validated when submitted.)
      <br>
-     <label>What is your favorite week of the year?<input type="week"></label>
+     <label>What is your favorite week of the year?<input type="week" id="favweek" name="favweek"></label>
      <br>
      &nbsp;&nbsp;(<strong>Note:</strong> type="week" is not supported in Firefox, Safari or Internet Explorer 11.)     
      <br>
-     <input type="submit" value="Submit">
+     <input type="submit" value="Submit" >
         <br>
         <input type="reset" value="Reset">
         <br>
     </form>
 
-
+<script src="scripts/attending4.js"></script>
 </body></html>
