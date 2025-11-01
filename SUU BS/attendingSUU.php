@@ -9,6 +9,12 @@ function get_form($num) {
     if ($conn->connect_error) {
         die("Connection failed:".$conn->connect_error);
     }
+     print"<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Attending SUU</title>"
+    css_import(num)
+    print "</head>\n"
+
     $sql = "SELECT * FROM user_inputs for_all_pages WHERE page=$num ORDER BY page_order";
     $result = $conn->query($sql)
     if ($result->num_rows > 0) {
@@ -17,21 +23,181 @@ function get_form($num) {
             $text = $row["text_for_display"]
             $type = $row["html_input_selector"]
             print "<form name=page_$num id=page_$num>\n"
-            print "<label for=$var>$text<input type=$type>"
-            if ($type == "select") (
+            print "<label for=$var>$text<input type=$type name=$var>\n"
+            if ($type == "select") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option"
                 $options = $conn->query($sql)
                 print "<select>\n"
                 while($entry = $options->fetch_assoc()) {
                     $option = entry["option"]
-                    print "\t <option value=$option name=$var>$option</option>\n"
+                    $selector = entry["selector"]
+                    print "\t <option value=$option name=$selector>$option</option>\n"
                 }
-                print("</select>")
-
-
-            )
+                print("</select>\n")
+            }
+            if ($type == "select") {
+                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option"
+                $options = $conn->query($sql)
+                print "<select>\n"
+                while($entry = $options->fetch_assoc()) {
+                    $option = entry["option"]
+                    $selector = entry["selector"]
+                    print "<label for=$selector>$option</label>\n"
+                    print "<input type=$type name=$selector value=$option>"
+                }
+            }
 
         }
+    }
+}
+function css_import($num) {
+    if ($num == 1) {
+        print "<style>\n
+        /* Internal CSS  */
+        h1 {
+            color: #db0000;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        div {
+            background-color: #db0000;
+            font-size: 25px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        body{
+    background-color: #e7e7e7;
+    margin-left: auto auto;
+        }
+    html{
+        background-color: #000000;
+        }
+
+    form {
+        margin-top: auto ;
+        padding-top: 10%;
+        text-align: center;
+    }
+
+    label br {padding-inline: 8%;}
+    input {
+        padding-left: 3px;
+    }
+    </style>"
+    }
+    elseif ($num == 2) {
+        print "<style>
+        h1 {
+            color: #db0000;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        div {
+            background-color: #e7e7e7;
+            font-size: 25px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        body{
+    background-color: #e7e7e7;
+    margin-left: auto;
+        }
+    html{
+        background-color: #000000;
+        }
+
+    form {
+        margin-top: auto ;
+        padding-top: 10%;
+        text-align: center;
+    }
+
+    label br {padding-inline: 8%;}
+    input {
+        padding-left: 3px;
+    }
+    </style>"
+    }
+    elseif($num == 3){
+        print "<style>
+            /* Internal CSS  */
+            h1 {
+                color: #db0000;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            div {
+                background-color: #e7e7e7;
+                font-size: 25px;
+                line-height: 1.5;
+                text-align: center;
+            }
+
+            body{
+        background-color: #e7e7e7;
+        margin-left: auto;
+            }
+        html{
+            background-color: #000000;
+            }
+
+        form {
+            margin-top: auto ;
+            padding-top: 10%;
+            text-align: center;
+            color: #db0000;
+        }
+
+        label br {padding-inline: 8%;}
+        input {
+            padding-left: 3px;
+        }
+    </style>"
+    }
+    elseif($num == 4) {
+        print "<style>
+      /* Internal CSS  */
+            h1 {
+                color: #db0000;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            div {
+                background-color: #e7e7e7;
+                font-size: 25px;
+                line-height: 1.5;
+                text-align: center;
+            }
+
+            body{
+            background-color: #e7e7e7;
+            margin-left: auto;
+            }
+
+        html{
+            background-color: #000000;
+            }
+
+        form {
+            margin-top: auto ;
+            padding-top: 10%;
+            text-align: center;
+            color: #db0000;
+        }
+
+        label br {padding-inline: 8%;
+        }
+
+        input {
+            padding-left: 3px;
+        }
+    </style>"
     }
 }
 ?>
