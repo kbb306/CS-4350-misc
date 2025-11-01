@@ -48,7 +48,8 @@ function get_form($num) {
             }
 
         }
-        print "<button type="submit">Submit</button>\n"
+        print "<input type="reset" value="Reset" id="reset">\n"
+        print "<input type="submit" value="Submit" id="submit" onclick="get_form($num+1)>\n""
     }
 }
 function css_import($num) {
@@ -202,3 +203,4 @@ function css_import($num) {
     }
 }
 ?>
+
