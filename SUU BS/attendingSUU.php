@@ -48,6 +48,7 @@ function get_form($num) {
             }
 
         }
+        print "<button type="submit">Submit</button>\n"
     }
 }
 function css_import($num) {
