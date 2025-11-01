@@ -1,5 +1,5 @@
 
-void function get_form($num) {
+<?php void function get_form($num) {
     $servername = "localhost";
     $username = "root";
     $password = "Legally18";
@@ -14,8 +14,9 @@ void function get_form($num) {
         while($row = $result->fetch_assoc()){
             $var = $row["variable_name"]
             $text = $row["text_for_display"]
+            $type = $row["html_input_selector"]
             
         }
     }
 }
-
+?>
