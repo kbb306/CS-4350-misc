@@ -71,7 +71,7 @@ function get_form($num=0) {
                <br>";
         print "\t<input type='submit' value='Submit' id='submit'>\n";
         if ($num == 1) {
-            print "<input type="button" value="Random Student" id="random" onclick="randomize()">";
+            print "<input type='button' value='Random Student' id='random; onclick='randomize()'>";
             print "<br>
                   <br>";
         }
