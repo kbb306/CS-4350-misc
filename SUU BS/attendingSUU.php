@@ -11,44 +11,44 @@ function get_form($num) {
     }
      print"<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-        <title>Attending SUU</title>"
+        <title>Attending SUU</title>";
     css_import(num)
     print "</head>\n"
     print "<body>"
     $sql = "SELECT * FROM user_inputs for_all_pages WHERE page=$num ORDER BY page_order";
-    $result = $conn->query($sql)
+    $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()){
-            $var = $row["variable_name"]
-            $text = $row["text_for_display"]
-            $type = $row["html_input_selector"]
-            print "\t<form name=page_$num id=page_$num>\n"
-            print "\t<label for=$var>$text<input type=$type name=$var>\n"
+            $var = $row["variable_name"];
+            $text = $row["text_for_display"];
+            $type = $row["html_input_selector"];
+            print "\t<form name=page_$num id=page_$num>\n";
+            print "\t<label for=$var>$text<input type=$type name=$var>\n";
             if ($type == "select") {
-                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option"
-                $options = $conn->query($sql)
-                print "\t<select>\n"
+                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
+                $options = $conn->query($sql);
+                print "\t<select>\n";
                 while($entry = $options->fetch_assoc()) {
-                    $option = entry["option"]
-                    $selector = entry["selector"]
-                    print "\t\t<option value=$option name=$selector>$option</option>\n"
+                    $option = entry["option"];
+                    $selector = entry["selector"];
+                    print "\t\t<option value=$option name=$selector>$option</option>\n";
                 }
-                print("\t</select>\n")
+                print("\t</select>\n");
             }
             if ($type == "radio") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option"
-                $options = $conn->query($sql)
+                $options = $conn->query($sql);
                 while($entry = $options->fetch_assoc()) {
-                    $option = entry["option"]
-                    $selector = entry["selector"]
-                    print "\t<label for=$selector>$option</label>\n"
-                    print "\t<input type=$type name=$selector value=$option>"
+                    $option = entry["option"];
+                    $selector = entry["selector"];
+                    print "\t<label for=$selector>$option</label>\n";
+                    print "\t<input type=$type name=$selector value=$option>";
                 }
             }
 
         }
-        print "\t<input type="reset" value="Reset" id="reset">\n"
-        print "\t<input type="submit" value="Submit" id="submit" onclick="get_form($num+1)>\n""
+        print "\t<input type="reset" value="Reset" id="reset">\n";
+        print "\t<input type="submit" value="Submit" id="submit" onclick="get_form($num+1)>\n"";
         print "</form>"
     }
 }
