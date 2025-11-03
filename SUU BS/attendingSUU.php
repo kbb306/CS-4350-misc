@@ -26,20 +26,20 @@ function get_form($num=0) {
             $type = $row["html_input_selector"];
             print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
             if ($type == "text") {
-                print "\t<label for=$var>$text<input type=$type name=$var>\n";
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
             else if ($type == "date") {
-                print "\t<label for=$var>$text<input type=$type name=$var min=$date>\n";
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var min=$date>\n";
             }
             else if ($type == "check") {
-                print "\t<label for=$var>$text<input type=$type name=$var>\n";
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
             if ($type == "select") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
                 if ($options -> num_rows > 0) {
                 print "<label for=$var>$text</label>";
-                print "\t<select name=$var>\n";
+                print "\t<select name=$var id=$var>\n";
                 while($entry = $options->fetch_assoc()) {
                     $option = $entry["option"];
                     $selector = $entry["selector"];
