@@ -10,10 +10,11 @@ function get_form($num=0) {
     if ($conn->connect_error) {
         die("Connection failed:".$conn->connect_error);
     }
-     print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>
+    print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>
     
-        <title>Attending SUU</title>
-        <script>scripts/randomize.js</script>";
+        <title>Attending SUU</title>"
+    $script = "script$num.js"
+    print "\t<script src='scirpts/$script'</script>";
     css_import($num);
     print "</head>\n";
     print "<body>";
