@@ -56,7 +56,7 @@ function get_form($num=0) {
                     $option = $entry["option"];
                     $selector = $entry["selector"];
                     print "\t<label for=$selector>$option</label>\n";
-                    print "\t<input type=$type name=$selector value=$option>";
+                    print "\t<input type=$type name=$selector id=$selector value=$option>";
                 }
             }
         }
