@@ -229,10 +229,7 @@ function css_import($num) {
     </style>";
     }
 }
-$number = $_REQUEST["pagenum"];
-if (empty($number)) {
-    $number = 1;
-}
+
 function sql_upload() {
     $servername = "localhost";
     $username = "admin";
@@ -254,6 +251,10 @@ function sql_upload() {
             }
         }
     }
+}
+$number = $_REQUEST["pagenum"];
+if (empty($number)) {
+    $number = 1;
 }
 get_form($number);
 
