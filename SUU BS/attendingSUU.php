@@ -49,7 +49,7 @@ function get_form($num) {
         }
         print "\t<input type="reset" value="Reset" id="reset">\n";
         print "\t<input type="submit" value="Submit" id="submit" onclick="get_form($num+1)>\n"";
-        print "</form>"
+        print "</form>";
     }
 }
 function css_import($num) {
@@ -87,7 +87,7 @@ function css_import($num) {
     input {
         padding-left: 3px;
     }
-    </style>"
+    </style>";
     }
     elseif ($num == 2) {
         print "<style>
@@ -122,7 +122,7 @@ function css_import($num) {
     input {
         padding-left: 3px;
     }
-    </style>"
+    </style>";
     }
     elseif($num == 3){
         print "<style>
@@ -159,7 +159,7 @@ function css_import($num) {
         input {
             padding-left: 3px;
         }
-    </style>"
+    </style>";
     }
     elseif($num == 4) {
         print "<style>
@@ -199,7 +199,7 @@ function css_import($num) {
         input {
             padding-left: 3px;
         }
-    </style>"
+    </style>";
     }
 }
 ?>  
