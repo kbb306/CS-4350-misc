@@ -12,9 +12,9 @@ function get_form($num) {
      print"<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
         <title>Attending SUU</title>";
-    css_import(num)
-    print "</head>\n"
-    print "<body>"
+    css_import(num);
+    print "</head>\n";
+    print "<body>";
     $sql = "SELECT * FROM user_inputs for_all_pages WHERE page=$num ORDER BY page_order";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
