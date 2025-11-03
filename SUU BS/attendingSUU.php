@@ -30,8 +30,9 @@ function get_form($num) {
                 print "\t<label for=$var>$text<input type=$type name=$var>\n";
             }
             if ($type == "select") {
-                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
+                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
+                if ($options -> num_rows > 0) {
                 print "<label for=$var>$text</label>";
                 print "\t<select name=$var>\n";
                 while($entry = $options->fetch_assoc()) {
@@ -41,9 +42,11 @@ function get_form($num) {
                 }
                 print("\t</select>\n");
             }
+        }
             if ($type == "radio") {
-                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
+                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
+                if ($options -> num_rows > 0) {
                 while($entry = $options->fetch_assoc()) {
                     $option = $entry["option"];
                     $selector = $entry["selector"];
@@ -51,6 +54,7 @@ function get_form($num) {
                     print "\t<input type=$type name=$selector value=$option>";
                 }
             }
+        }
             print "<br>";
         }
         print "\t<input type='reset' value='Reset' id='reset'>\n";
