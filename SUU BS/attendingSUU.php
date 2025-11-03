@@ -23,17 +23,21 @@ function get_form($num) {
             $text = $row["text_for_display"];
             $type = $row["html_input_selector"];
             print "\t<form name=page_$num id=page_$num>\n";
-            print "\t<label for=$var>$text<input type=$type name=$var>\n";
+            if ($type == "text") {
+                print "\t<label for=$var>$text<input type=$type name=$var>\n";
+            }
             if ($type == "select") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
                 $options = $conn->query($sql);
-                print "\t<select>\n";
+                print "<label for=$var>"
+                print "\t<select name=$var>\n";
                 while($entry = $options->fetch_assoc()) {
                     $option = $entry["option"];
                     $selector = $entry["selector"];
                     print "\t\t<option value=$option name=$selector>$option</option>\n";
                 }
-                print("\t</select>\n");
+                print("\t</select>
+                </label>");
             }
             if ($type == "radio") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
