@@ -9,7 +9,7 @@ function get_form($num) {
     if ($conn->connect_error) {
         die("Connection failed:".$conn->connect_error);
     }
-     print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+     print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>
     
         <title>Attending SUU</title>";
     css_import(num);
