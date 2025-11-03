@@ -6,7 +6,7 @@ function get_form($num=0) {
     $password = "Legally18";
     $dbname = "suubs";
     $conn = new mysqli($servername, $username,$password,$dbname);
-    $date = date()
+    $date = date("d/m/Y");
     if ($conn->connect_error) {
         die("Connection failed:".$conn->connect_error);
     }
