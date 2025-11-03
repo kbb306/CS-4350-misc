@@ -6,12 +6,14 @@ function get_form($num=0) {
     $password = "Legally18";
     $dbname = "suubs";
     $conn = new mysqli($servername, $username,$password,$dbname);
+    $date = date()
     if ($conn->connect_error) {
         die("Connection failed:".$conn->connect_error);
     }
      print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>
     
-        <title>Attending SUU</title>";
+        <title>Attending SUU</title>
+        <script>scripts/randomize.js</script>";
     css_import($num);
     print "</head>\n";
     print "<body>";
@@ -27,6 +29,9 @@ function get_form($num=0) {
                 print "\t<label for=$var>$text<input type=$type name=$var>\n";
             }
             else if ($type == "date") {
+                print "\t<label for=$var>$text<input type=$type name=$var min=$date>\n";
+            }
+            else if ($type == "check") {
                 print "\t<label for=$var>$text<input type=$type name=$var>\n";
             }
             if ($type == "select") {
@@ -55,11 +60,21 @@ function get_form($num=0) {
                 }
             }
         }
-            print "<br>";
+            print "<br>
+                   <br>";
         }
         print "<input type='hidden' name='pagenum' value='$num+1'>";
+        print "<br>
+               <br>";
         print "\t<input type='reset' value='Reset' id='reset'>\n";
+        print "<br>
+               <br>";
         print "\t<input type='submit' value='Submit' id='submit'>\n";
+        if ($num == 1) {
+            print "<input type="button" value="Random Student" id="random" onclick="randomize()">"
+            print "<br>
+                <br>";
+        }
         print "</form>";
     }
 }
