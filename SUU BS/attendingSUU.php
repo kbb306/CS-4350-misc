@@ -26,18 +26,20 @@ function get_form($num) {
             if ($type == "text") {
                 print "\t<label for=$var>$text<input type=$type name=$var>\n";
             }
+            else if ($type == "date") {
+                print "\t<label for=$var>$text<input type=$type name=$var>\n";
+            }
             if ($type == "select") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
                 $options = $conn->query($sql);
-                print "<label for=$var>";
+                print "<label for=$var>$text</label>";
                 print "\t<select name=$var>\n";
                 while($entry = $options->fetch_assoc()) {
                     $option = $entry["option"];
                     $selector = $entry["selector"];
                     print "\t\t<option value=$option name=$selector>$option</option>\n";
                 }
-                print("\t</select>
-                </label>");
+                print("\t</select>\n");
             }
             if ($type == "radio") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
