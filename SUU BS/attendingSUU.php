@@ -1,6 +1,6 @@
 
 <?php 
-function get_form($num) {
+function get_form($num=0) {
     $servername = "localhost";
     $username = "root";
     $password = "Legally18";
@@ -22,7 +22,7 @@ function get_form($num) {
             $var = $row["variable_name"];
             $text = $row["text_for_display"];
             $type = $row["html_input_selector"];
-            print "\t<form name=page_$num id=page_$num>\n";
+            print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
             if ($type == "text") {
                 print "\t<label for=$var>$text<input type=$type name=$var>\n";
             }
@@ -57,8 +57,9 @@ function get_form($num) {
         }
             print "<br>";
         }
+        print "<input type='hidden' name='pagenum' value='$num+1'>";
         print "\t<input type='reset' value='Reset' id='reset'>\n";
-        print "\t<input type='submit' value='Submit' id='submit' onclick='get_form($num+1)'>\n";
+        print "\t<input type='submit' value='Submit' id='submit'>\n";
         print "</form>";
     }
 }
@@ -212,7 +213,12 @@ function css_import($num) {
     </style>";
     }
 }
-get_form(1)
+$number = $_GET["pagenum"];
+if (empty($number)) {
+    $number = 1;
+}
+get_form($number)
+
 ?>  
 </body>
 </html>
