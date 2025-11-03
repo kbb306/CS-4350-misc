@@ -12,9 +12,9 @@ function get_form($num=0) {
     }
     print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>
     
-        <title>Attending SUU</title>"
-    $script = "script$num.js"
-    print "\t<script src='scirpts/$script'</script>";
+        <title>Attending SUU</title>";
+    $script = "script$num.js";
+    print "\t<script src='scripts/$script'</script>";
     css_import($num);
     print "</head>\n";
     print "<body>";
@@ -233,27 +233,30 @@ $number = $_REQUEST["pagenum"];
 if (empty($number)) {
     $number = 1;
 }
-get_form($number)
-$servername = "localhost";
-$username = "admin";
-$password = "Legally18"
-$dbname = "suubs";
-$conn = new mysqli($servername, $username,$password,$dbname);
-if ($conn->connect_error) {
-        die("Connection failed:".$conn->connect_error);
-    }
-$sql = "SHOW COLUMNS FROM userdata"
-$columns = $conn -> query($sql)
-while($column = $columns->get_assoc()) {
-    foreach($_REQUEST as $key => $value) {
-        if ($key == $column) {
-            $sql = "INSERT INTO userdata ($column) VALUES $value"
-           if ($conn -> query($sql) == TRUE) {
-            echo "Successful record creation!"
-           }
+function sql_upload() {
+    $servername = "localhost";
+    $username = "admin";
+    $password = "Legally18";
+    $dbname = "suubs";
+    $conn = new mysqli($servername, $username,$password,$dbname);
+    if ($conn->connect_error) {
+            die("Connection failed:".$conn->connect_error);
+        }
+    $sql = "SHOW COLUMNS FROM userdata";
+    $columns = $conn -> query($sql);
+    while($column = $columns->get_assoc()) {
+        foreach($_REQUEST as $key => $value) {
+            if ($key == $column) {
+                $sql = "INSERT INTO userdata ($column) VALUES $value";
+            if ($conn -> query($sql) == TRUE) {
+                echo "Successful record creation!";
+                }
+            }
         }
     }
 }
+get_form($number);
+
 ?>  
 </body>
 </html>
