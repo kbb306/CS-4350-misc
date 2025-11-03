@@ -36,7 +36,7 @@ function get_form($num) {
                 print("\t</select>\n");
             }
             if ($type == "radio") {
-                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option"
+                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
                 $options = $conn->query($sql);
                 while($entry = $options->fetch_assoc()) {
                     $option = $entry["option"];
