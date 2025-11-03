@@ -234,7 +234,26 @@ if (empty($number)) {
     $number = 1;
 }
 get_form($number)
-
+$servername = "localhost";
+$username = "admin";
+$password = "Legally18"
+$dbname = "suubs";
+$conn = new mysqli($servername, $username,$password,$dbname);
+if ($conn->connect_error) {
+        die("Connection failed:".$conn->connect_error);
+    }
+$sql = "SHOW COLUMNS FROM userdata"
+$columns = $conn -> query($sql)
+while($column = $columns->get_assoc()) {
+    foreach($_REQUEST as $key => $value) {
+        if ($key == $column) {
+            $sql = "INSERT INTO userdata ($column) VALUES $value"
+           if ($conn -> query($sql) == TRUE) {
+            echo "Successful record creation!"
+           }
+        }
+    }
+}
 ?>  
 </body>
 </html>
