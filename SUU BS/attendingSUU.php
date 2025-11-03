@@ -202,6 +202,7 @@ function css_import($num) {
     </style>";
     }
 }
+get_form(1)
 ?>  
 </body>
 </html>
