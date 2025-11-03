@@ -229,7 +229,7 @@ function css_import($num) {
     </style>";
     }
 }
-$number = $_GET["pagenum"];
+$number = $_REQUEST["pagenum"];
 if (empty($number)) {
     $number = 1;
 }
