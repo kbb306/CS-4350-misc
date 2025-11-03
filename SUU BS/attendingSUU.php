@@ -15,7 +15,7 @@ function get_form($num) {
     css_import($num);
     print "</head>\n";
     print "<body>";
-    $sql = "SELECT * FROM user_inputs for_all_pages WHERE page=$num ORDER BY page_order";
+    $sql = "SELECT * FROM user_inputs_for_all_pages WHERE page=$num ORDER BY page_order";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()){
