@@ -58,7 +58,7 @@ function get_form($num) {
             print "<br>";
         }
         print "\t<input type='reset' value='Reset' id='reset'>\n";
-        print "\t<input type='submit' value='Submit' id='submit' onclick='get_form($num+1)>\n'";
+        print "\t<input type='submit' value='Submit' id='submit' onclick='get_form($num+1)'>\n";
         print "</form>";
     }
 }
