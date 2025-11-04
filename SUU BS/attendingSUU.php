@@ -14,7 +14,7 @@ function get_form($num=0) {
     
         <title>Attending SUU</title>";
     $script = "script$num.js";
-    print "\t<script src='scripts/$script'</script>";
+    print "\t<script src='scripts/$script'></script>";
     css_import($num);
     print "</head>\n";
     print "<body>";
@@ -72,7 +72,7 @@ function get_form($num=0) {
                <br>";
         print "\t<input type='submit' value='Submit' id='submit'>\n";
         if ($num == 1) {
-            print "<input type='button' value='Random Student' id='random; onclick='randomize()'>";
+            print "<input type='hidden' name='pagenum' value='".($num+1)."'>";
             print "<br>
                   <br>";
         }
@@ -232,7 +232,7 @@ function css_import($num) {
 
 function sql_upload() {
     $servername = "localhost";
-    $username = "admin";
+    $username = "root";
     $password = "Legally18";
     $dbname = "suubs";
     $conn = new mysqli($servername, $username,$password,$dbname);
@@ -241,7 +241,7 @@ function sql_upload() {
         }
     $sql = "SHOW COLUMNS FROM userdata";
     $columns = $conn -> query($sql);
-    while($column = $columns->get_assoc()) {
+    while($column = $columns->fetch_assoc()) {
         foreach($_REQUEST as $key => $value) {
             if ($key == $column) {
                 $sql = "INSERT INTO userdata ($column) VALUES $value";
@@ -257,7 +257,7 @@ if (empty($number)) {
     $number = 1;
 }
 get_form($number);
-
+sql_upload();
 ?>  
 </body>
 </html>
