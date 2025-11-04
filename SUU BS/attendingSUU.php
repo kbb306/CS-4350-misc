@@ -20,12 +20,13 @@ function get_form($num=0) {
     print "<body>";
     $sql = "SELECT * FROM user_inputs_for_all_pages WHERE page=$num ORDER BY page_order";
     $result = $conn->query($sql);
+    print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
+
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()){
             $var = $row["variable_name"];
             $text = $row["text_for_display"];
             $type = $row["html_input_selector"];
-            print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
             if ($type == "text") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
