@@ -6,7 +6,7 @@ function get_form($num=0) {
     $password = "Legally18";
     $dbname = "suubs";
     $conn = new mysqli($servername, $username,$password,$dbname);
-    $date = date("d/m/Y");
+    $date = date("Y-m-d");
     if ($conn->connect_error) {
         die("Connection failed:".$conn->connect_error);
     }
@@ -31,7 +31,7 @@ function get_form($num=0) {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
             else if ($type == "date") {
-                print "\t<label for=$var>$text<input type=$type name=$var id=$var min=$date value='$date'>\n";
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var min=$date value=$date>\n";
             }
             else if ($type == "check") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
