@@ -31,7 +31,7 @@ function get_form($num=0) {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
             else if ($type == "date") {
-                print "\t<label for=$var>$text<input type=$type name=$var id=$var min=$date>\n";
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var min=$date value=$date>\n";
             }
             else if ($type == "check") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
