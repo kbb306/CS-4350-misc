@@ -253,8 +253,10 @@ function sql_upload() {
         }
     }
 }
+if (isSet($_REQUEST["pagenum"])) {
 $number = $_REQUEST["pagenum"];
-if (empty($number)) {
+}
+else {
     $number = 1;
 }
 get_form($number);
