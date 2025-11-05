@@ -1,33 +1,47 @@
 
 <?php 
-function get_form($num) {
+function get_form($num=0) {
     $servername = "localhost";
     $username = "root";
     $password = "Legally18";
     $dbname = "suubs";
     $conn = new mysqli($servername, $username,$password,$dbname);
+    $date = date("Y-m-d");
     if ($conn->connect_error) {
         die("Connection failed:".$conn->connect_error);
     }
-     print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>
+    print"<html lang='en'><head><meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>
     
         <title>Attending SUU</title>";
-    css_import(num);
+    $script = "script$num.js";
+    print "\t<script src='scripts/$script'></script>";
+    css_import($num);
     print "</head>\n";
     print "<body>";
-    $sql = "SELECT * FROM user_inputs for_all_pages WHERE page=$num ORDER BY page_order";
+    $sql = "SELECT * FROM user_inputs_for_all_pages WHERE page=$num ORDER BY page_order";
     $result = $conn->query($sql);
+    print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
+
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()){
             $var = $row["variable_name"];
             $text = $row["text_for_display"];
             $type = $row["html_input_selector"];
-            print "\t<form name=page_$num id=page_$num>\n";
-            print "\t<label for=$var>$text<input type=$type name=$var>\n";
+            if ($type == "text") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "date") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var min=$date value=$date>\n";
+            }
+            else if ($type == "check") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
             if ($type == "select") {
-                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option";
+                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
-                print "\t<select>\n";
+                if ($options -> num_rows > 0) {
+                print "<label for=$var>$text</label>";
+                print "\t<select name=$var id=$var>\n";
                 while($entry = $options->fetch_assoc()) {
                     $option = $entry["option"];
                     $selector = $entry["selector"];
@@ -35,20 +49,34 @@ function get_form($num) {
                 }
                 print("\t</select>\n");
             }
+        }
             if ($type == "radio") {
-                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector=$var ORDER BY option"
+                $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
+                if ($options -> num_rows > 0) {
                 while($entry = $options->fetch_assoc()) {
                     $option = $entry["option"];
                     $selector = $entry["selector"];
                     print "\t<label for=$selector>$option</label>\n";
-                    print "\t<input type=$type name=$selector value=$option>";
+                    print "\t<input type=$type name=$selector id=$selector value=$option>";
                 }
             }
-
         }
+            print "<br>
+                   <br>";
+        }
+        print "<input type='hidden' name='pagenum' value='$num+1'>";
+        print "<br>
+               <br>";
         print "\t<input type='reset' value='Reset' id='reset'>\n";
-        print "\t<input type='submit' value='Submit' id='submit' onclick='get_form($num+1)>\n'";
+        print "<br>
+               <br>";
+        print "\t<input type='submit' value='Submit' id='submit'>\n";
+        if ($num == 1) {
+            print "<input type='hidden' name='pagenum' value='".($num+1)."'>";
+            print "<br>
+                  <br>";
+        }
         print "</form>";
     }
 }
@@ -202,6 +230,37 @@ function css_import($num) {
     </style>";
     }
 }
+
+function sql_upload() {
+    $servername = "localhost";
+    $username = "root";
+    $password = "Legally18";
+    $dbname = "suubs";
+    $conn = new mysqli($servername, $username,$password,$dbname);
+    if ($conn->connect_error) {
+            die("Connection failed:".$conn->connect_error);
+        }
+    $sql = "SHOW COLUMNS FROM userdata";
+    $columns = $conn -> query($sql);
+    while($column = $columns->fetch_assoc()) {
+        foreach($_REQUEST as $key => $value) {
+            if ($key == $column) {
+                $sql = "INSERT INTO userdata ($column) VALUES $value";
+            if ($conn -> query($sql) == TRUE) {
+                echo "Successful record creation!";
+                }
+            }
+        }
+    }
+}
+if (isSet($_REQUEST["pagenum"])) {
+$number = $_REQUEST["pagenum"];
+}
+else {
+    $number = 1;
+}
+get_form($number);
+sql_upload();
 ?>  
 </body>
 </html>
