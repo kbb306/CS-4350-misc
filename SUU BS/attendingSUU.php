@@ -1,6 +1,7 @@
 
 <?php 
 function get_form($num=0) {
+    $logs = array();
     $servername = "localhost";
     $username = "root";
     $password = "Legally18";
@@ -15,6 +16,7 @@ function get_form($num=0) {
         <title>Attending SUU</title>";
     $script = "script$num.js";
     print "\t<script src='scripts/$script'></script>";
+    print "\t<script src=scripts/errorlog.js>logger(". json_encode($logs) . ")</script>";
     css_import($num);
     print "</head>\n";
     print "<body>";
@@ -248,7 +250,7 @@ function sql_upload() {
             if ($key == $column) {
                 $sql = "INSERT INTO `userdata` (`$column`) VALUES '$value'";
             if ($conn -> query($sql) == TRUE) {
-                echo "Successful record creation!";
+                array_push($logs, "Successful record creation!");
                 }
             }
         }
