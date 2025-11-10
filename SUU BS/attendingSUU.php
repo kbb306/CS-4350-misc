@@ -55,7 +55,6 @@ function get_form($num=0) {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
                 if ($options -> num_rows > 0) {
-                    echo "Found the data";
                     while($entry = $options->fetch_assoc()) {
                         $option = $entry["option"];
                         $selector = $entry["selector"];
