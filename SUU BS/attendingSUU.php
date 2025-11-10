@@ -40,26 +40,28 @@ function get_form($num=0) {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
                 if ($options -> num_rows > 0) {
-                print "<label for=$var>$text</label>";
-                print "\t<select name=$var id=$var>\n";
-                while($entry = $options->fetch_assoc()) {
-                    $option = $entry["option"];
-                    $selector = $entry["selector"];
-                    print "\t\t<option value=$option name=$selector>$option</option>\n";
-                }
+                    print "<label for=$var>$text</label>";
+                    print "\t<select name=$var id=$var>\n";
+                    while($entry = $options->fetch_assoc()) {
+                        $option = $entry["option"];
+                        $selector = $entry["selector"];
+                        print "\t\t<option value=$option name=$selector>$option</option>\n";
+                    }
                 print("\t</select>\n");
             }
         }
             if ($type == "radio") {
+                //echo "Radio section.";
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
                 if ($options -> num_rows > 0) {
-                while($entry = $options->fetch_assoc()) {
-                    $option = $entry["option"];
-                    $selector = $entry["selector"];
-                    print "\t<label for=$selector>$option</label>\n";
-                    print "\t<input type=$type name=$selector id=$selector value=$option>";
-                }
+                    echo "Found the data";
+                    while($entry = $options->fetch_assoc()) {
+                        $option = $entry["option"];
+                        $selector = $entry["selector"];
+                        print "\t<label for=$selector>$option</label>\n";
+                        print "\t<input type=$type name=$selector id=$selector value=$option>";
+                    }
             }
         }
             print "<br>
