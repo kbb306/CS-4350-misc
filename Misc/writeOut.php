@@ -21,7 +21,7 @@
                 echo "<table><tr><th>Book</th><th>Book Number</th><th>Chapters Overall</th><th>Chapters in Book</th><th>Chapter key</th><th>Chapter Title</th><th>Page Start</th><th>Page End</th></tr>";
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo "<tr><td>".$row["Book"]."</td><td>".$row["Book_Number"]." ".$row["Chapters_Overall"]." ".$row["Chapter_Key"]." ".$row["Chapter_Title"]." ".$row["Page_Start"]." ".$row["Page_End"]."</td></tr>";
+                    echo "<tr><td>".$row["Book"]."</td><td>".$row["Book_Number"]."<td>".$row["Chapters_Overall"]."<td>".$row["Chapters_Book"]."<td>".$row["Chapter_Key"]."<td>".$row["Chapter_Title"]."<td>".$row["Page_Start"]."<td>".$row["Page_End"]."</td></tr>";
                 }
                 echo "</table>";
                 } else {
