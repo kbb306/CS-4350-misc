@@ -246,7 +246,7 @@ function sql_upload() {
     while($column = $columns->fetch_assoc()) {
         foreach($_REQUEST as $key => $value) {
             if ($key == $column) {
-                $sql = "INSERT INTO userdata ($column) VALUES $value";
+                $sql = "INSERT INTO `userdata` (`$column`) VALUES '$value'";
             if ($conn -> query($sql) == TRUE) {
                 echo "Successful record creation!";
                 }
