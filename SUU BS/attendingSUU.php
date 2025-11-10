@@ -33,7 +33,7 @@ function get_form($num=0) {
             else if ($type == "date") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var min=$date value=$date>\n";
             }
-            else if ($type == "check") {
+            else if ($type == "checkbox") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
             if ($type == "select") {
