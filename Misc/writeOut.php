@@ -14,7 +14,7 @@
             die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT * from 'harrypotter' ORDER BY 'Book_Number' ";
+            $sql = "SELECT * from `harrypotter` ORDER BY 'Book_Number' ";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
