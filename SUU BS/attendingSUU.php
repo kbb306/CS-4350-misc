@@ -245,17 +245,12 @@ function sql_upload() {
             die("Connection failed:".$conn->connect_error);
         }
     $sql = "SHOW COLUMNS FROM userdata";
-    $columns = $conn -> query($sql);
-    while($column = $columns->fetch_assoc()) {
-        foreach($_REQUEST as $key => $value) {
-            if ($key == $column[]) {
-                $sql = "INSERT INTO `userdata` (`$column`) VALUES ($value)";
-            if ($conn -> query($sql) == TRUE) {
-                array_push($logs, "Successful record creation!");
-                }
-            }
-        }
+    $columns = [];
+    $results = $conn -> query($sql);
+    while($result = $results->fetch_assoc()) {
+      $columns[] = $result["Field"];
     }
+    
 }
 if (isSet($_REQUEST["pagenum"])) {
 $number = $_REQUEST["pagenum"];
