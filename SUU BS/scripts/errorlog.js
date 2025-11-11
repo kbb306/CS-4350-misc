@@ -1,5 +1,5 @@
 function logger(string) {
-    for (each of string.split(",")) {
+    for (each of (String(string).split(","))) {
         console.log(each)
     }
 }
