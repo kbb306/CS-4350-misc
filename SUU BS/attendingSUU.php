@@ -235,7 +235,14 @@ function css_import($num) {
     }
 }
 function sql_upload() {
-    
+    $servername = "localhost";
+    $username = "root";
+    $password = "Legally18";
+    $dbname = "suubs";
+    $conn = new mysqli($servername, $username,$password,$dbname);
+    $sql = "SHOW COLUMNS FROM userdata"
+    $result = $conn -> query($sql)
+    print $result
 }
 if (isSet($_REQUEST["pagenum"])) {
 $number = $_REQUEST["pagenum"];
