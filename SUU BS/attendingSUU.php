@@ -250,7 +250,53 @@ function sql_upload() {
     while($result = $results->fetch_assoc()) {
       $columns[] = $result["Field"];
     }
+    $assign = [];
+    $types  = '';
+    $values = [];
+    $haveUserValues = false;
+    foreach($col as $columns ) {
+        if (isset($col) && $col != '') {
+            $assign[] = "`$col` = ?";
+            $types   .= 's';
+            $values[] = $_REQUEST[$col];
+            $haveUserValues = true;
+        }
+        else {
+            $assign[] = "NULL"
+        }
     
+    }
+      if (!$haveUserValues) {
+        $conn->close();
+        return;
+    }
+
+    $sql = "INSERT INTO `$table` SET " . implode(', ', $assign);
+    $updates = [];
+    foreach ($collums as $col) {
+        if (isset($_REQUEST[$c]) && $_REQUEST[$col] !== '') {
+            // update only submitted fields
+            $updates[] = "`$col` = VALUES(`$col`)";
+        }
+    }
+    if ($updates) {
+        $sql .= " ON DUPLICATE KEY UPDATE " . implode(', ', $updates);
+    }
+
+        $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+    if ($types !== '') {
+        $stmt->bind_param($types, ...$values);
+    }
+
+    if (!$stmt->execute()) {
+        die("Insert failed: " . $stmt->error);
+    }
+
+    $stmt->close();
+    $conn->close();
 }
 if (isSet($_REQUEST["pagenum"])) {
 $number = $_REQUEST["pagenum"];
