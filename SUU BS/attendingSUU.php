@@ -297,10 +297,10 @@ function sql_upload() {
             $types .= infer_mysqli_type($colTypes[$c] ?? '', $formvals[$c]);
             if ($formvals == "on" || "off") {
                 if ($formvals == "on") {
-                    $values[] = 1
+                    $values[] = 1;
                 }
                 else if ($formvals == "off") {
-                    $values[] = 0
+                    $values[] = 0;
                 }
             }
             else {
