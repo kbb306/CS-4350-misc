@@ -295,7 +295,17 @@ function sql_upload() {
         if (array_key_exists($c, $formvals)) {
             $assign[] = "`$c` = ?";
             $types .= infer_mysqli_type($colTypes[$c] ?? '', $formvals[$c]);
-            $values[] = $formvals[$c];
+            if ($formvals == "on" || "off") {
+                if ($formvals == "on") {
+                    $values[] = 1
+                }
+                else if ($formvals == "off") {
+                    $values[] = 0
+                }
+            }
+            else {
+                $values[] = $formvals[$c];
+            }
         } else {
             $assign[] = "`$c` = DEFAULT";
         }
