@@ -88,7 +88,7 @@ function get_form($num=0) {
         }
             if ($type == "radio") {
                 //echo "Radio section.";
-                print "<label>$text</label>;
+                print "<label>$text</label>";
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
                 if ($options -> num_rows > 0) {
