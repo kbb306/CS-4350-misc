@@ -235,15 +235,73 @@ function css_import($num) {
     }
 }
 function sql_upload() {
-    $servername = "localhost";
-    $username = "root";
-    $password = "Legally18";
-    $dbname = "suubs";
-    $conn = new mysqli($servername, $username,$password,$dbname);
-    $sql = "SHOW COLUMNS FROM userdata"
-    $result = $conn -> query($sql)
-    print $result
+    if (empty($_REQUEST)) return;
+
+    $conn = new mysqli("localhost", "root", "Legally18", "suubs");
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+    $conn->set_charset("utf8mb4");
+
+    $table = "userdata";
+
+    $cols = [];
+    $colTypes = []; 
+    $res = $conn->query("SHOW COLUMNS FROM `$table`");
+    if ($res === false) die("SHOW COLUMNS failed: " . $conn->error);
+    while ($row = $res->fetch_assoc()) {
+        $cols[] = $row['Field'];          
+        $colTypes[$row['Field']] = $row['Type']; 
+
+
+    $formvals = [];
+    foreach ($_REQUEST as $k => $v) {
+        if (in_array($k, $cols, true)) {
+            $formvals[$k] = $v;           
+        }
+    }
+    if (!$formvals) { $conn->close(); return; }
+
+    $assign = [];
+    $types  = '';
+    $values = [];
+
+    foreach ($cols as $c) {               
+        if (array_key_exists($c, $formvals)) {
+            $assign[] = "`$c` = ?";
+            $types .= infer_mysqli_type($colTypes[$c] ?? '', $formvals[$c]);
+            $values[] = $formvals[$c];
+        } else {
+            $assign[] = "`$c` = DEFAULT";
+        }
+    }
+
+    $updates = [];
+    foreach ($formvals as $c => $_) {
+        $updates[] = "`$c` = VALUES(`$c`)";
+    }
+
+    $sql = "INSERT INTO `$table` SET " . implode(', ', $assign);
+    if ($updates) {
+        $sql .= " ON DUPLICATE KEY UPDATE " . implode(', ', $updates);
+    }
+
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) die("Prepare failed: " . $conn->error);
+    if ($values) $stmt->bind_param($types, ...$values);
+    if (!$stmt->execute()) die("Upsert failed: " . $stmt->error);
+
+    $stmt->close();
+    $conn->close();
 }
+
+
+function infer_mysqli_type(string $mysqlType, $value): string {
+    $t = strtolower($mysqlType);
+    if (preg_match('/\b(int|bit)\b/', $t))      return 'i';        
+    if (preg_match('/\b(float|double|decimal|real)\b/', $t)) return 'd';
+    if (preg_match('/\b(blob|binary|varbinary)\b/', $t))    return 'b';
+    return 's'; 
+}
+
 if (isSet($_REQUEST["pagenum"])) {
 $number = $_REQUEST["pagenum"];
 }
