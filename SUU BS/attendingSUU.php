@@ -39,6 +39,33 @@ function get_form($num=0) {
             else if ($type == "checkbox") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
+            else if ($type == "month") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "color") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "number") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "email") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "password") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "range") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "time") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "url") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
+            else if ($type == "week") {
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+            }
             if ($type == "select") {
                 $sql = "SELECT * FROM info_for_select_and_radio_input WHERE selector='$var' ORDER BY option";
                 $options = $conn->query($sql);
