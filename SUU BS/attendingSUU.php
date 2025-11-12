@@ -292,7 +292,7 @@ function sql_upload() {
     $stmt->close();
     $conn->close();
 }
-
+}
 
 function infer_mysqli_type(string $mysqlType, $value): string {
     $t = strtolower($mysqlType);
