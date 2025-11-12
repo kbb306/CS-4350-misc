@@ -254,7 +254,7 @@ function sql_upload() {
     $types  = '';
     $values = [];
     $haveUserValues = false;
-    foreach($col as $columns ) {
+    foreach($columns as $col ) {
         if (isset($col) && $col != '') {
             $assign[] = "`$col` = ?";
             $types   .= 's';
