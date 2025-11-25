@@ -5,6 +5,10 @@ if (empty($_SESSION['submission_id'])) {
     $_SESSION['submission_id'] = random_bytes(16); // 16 bytes = 128-bit id
 }
 function get_form($num=0) {
+    if ($num > 4) {
+        header("location: studentinformation.php")
+            exit()
+    }
     $logs = array();
     $servername = "localhost";
     $username = "root";
@@ -28,8 +32,9 @@ function get_form($num=0) {
     $sql = "SELECT * FROM user_inputs_for_all_pages WHERE page=$num ORDER BY page_order";
     $result = $conn->query($sql);
     print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
-    $subIdHex = bin2hex($_SESSION['submission_id']);
-    print"<input type='hidden' name='submission_id' value='$subIdHex'>";
+    print '<input type="hidden" name="submission_id" value="' 
+    . htmlspecialchars(bin2hex($_SESSION['submission_id']), ENT_QUOTES) 
+    . '">';
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()){
             $var = $row["variable_name"];
@@ -292,6 +297,9 @@ function sql_upload() {
         if (in_array($k, $cols, true)) {
             $formvals[$k] = $v;           
         }
+        else {
+            print "Match not found for $k"
+        }
     }
     if (!$formvals) { return; }
 
@@ -302,11 +310,28 @@ function sql_upload() {
 foreach ($cols as $c) {
     if (!array_key_exists($c, $formvals)) {
         // If you want true default from schema for missing fields:
-        $assign[] = "`$c` = DEFAULT";
         continue;
     }
 
     $raw = $formvals[$c];
+
+    if ($c === 'birthday_as_week_year' && $raw !== '') {
+    if (preg_match('/^\d{4}-\d{2}$/', $raw)) {
+        $val  = $raw . '-01';   
+        $type = 's';
+    } else {
+        $val  = null;           
+        $type = 's';
+    }
+
+    } elseif ($c === 'favorite_week_of_year' && $raw !== '') {
+    if (preg_match('/^\d{4}-W(\d{2})$/', $raw, $m)) {
+        $val  = (int)$m[1];     
+        $type = 'i';
+    } else {
+        $val  = 0;              
+        $type = 'i';
+    }
 
     // Normalize HTML checkbox strings to ints
     if ($raw === 'on' || $raw === 'off') {
