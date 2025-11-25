@@ -40,6 +40,7 @@ function get_form($num=0) {
             $var = $row["variable_name"];
             $text = $row["text_for_display"];
             $type = $row["html_input_selector"];
+            $pattern = $row["pattern"]
             if ($type == "text") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
@@ -59,7 +60,7 @@ function get_form($num=0) {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
             else if ($type == "email") {
-                print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
+                print "\t<label for=$var>$text<input type=$type name=$var id=$var pattern=$pattern>\n";
             }
             else if ($type == "password") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
