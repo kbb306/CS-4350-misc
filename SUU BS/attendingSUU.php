@@ -1,10 +1,21 @@
 
+
 <?php 
 session_start();
-if (empty($_SESSION['submission_id'])) {
-    $_SESSION['submission_id'] = random_bytes(16); // 16 bytes = 128-bit id
+
+// Per-request/per-survey submission id (hex string)
+$currentSubmissionIdHex = '';
+
+if (!empty($_REQUEST['submission_id'])) {
+    // Coming back from a previous page: reuse the same id
+    $currentSubmissionIdHex = $_REQUEST['submission_id'];
+} else {
+    // New survey (no submission_id in the request): make a new one
+    $currentSubmissionIdHex = bin2hex(random_bytes(16));
 }
-function get_form($num=0) {
+
+function get_form($num = 0) {
+    global $currentSubmissionIdHex;
     if ($num > 4) {
         header("location: studentinformation.php")
             exit()
@@ -33,7 +44,7 @@ function get_form($num=0) {
     $result = $conn->query($sql);
     print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
     print '<input type="hidden" name="submission_id" value="' 
-    . htmlspecialchars(bin2hex($_SESSION['submission_id']), ENT_QUOTES) 
+    . htmlspecialchars($currentSubmissionIdHex, ENT_QUOTES) 
     . '">';
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()){
@@ -274,10 +285,15 @@ function css_import($num) {
     }
 }
 function sql_upload() {
+    global $currentSubmissionIdHex;
+
     if (empty($_REQUEST)) return;
-    if (empty($_REQUEST['submission_id']) && !empty($_SESSION['submission_id'])) {
-    $_REQUEST['submission_id'] = bin2hex($_SESSION['submission_id']);
+
+    // Ensure the request always has the id we decided on
+    if (empty($_REQUEST['submission_id'])) {
+        $_REQUEST['submission_id'] = $currentSubmissionIdHex;
     }
+  
     $conn = new mysqli("localhost", "root", "Legally18", "suubs");
     if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
     $conn->set_charset("utf8mb4");
@@ -316,7 +332,12 @@ foreach ($cols as $c) {
 
     $raw = $formvals[$c];
 
-    if ($c === 'birthday_as_week_year') {
+    if ($c === 'submission_id') {
+        // Convert hex → 16 bytes for BINARY(16)
+        $val  = hex2bin($raw);
+        $type = 'b';
+
+    elseif ($c === 'birthday_as_month_year') {
     if ($raw !== '' && preg_match('/^\d{4}-\d{2}$/', $raw)) {
         $val  = $raw . '-01';  // Convert to a valid DATE
         $type = 's';
@@ -377,7 +398,7 @@ foreach ($cols as $c) {
     $conn->close();
 }
 
-
+}
 function infer_mysqli_type(string $mysqlType, $value): string {
     $t = strtolower($mysqlType);
     if (preg_match('/\b(int|bit)\b/', $t))      return 'i';        
