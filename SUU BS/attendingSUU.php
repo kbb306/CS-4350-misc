@@ -315,16 +315,21 @@ foreach ($cols as $c) {
 
     $raw = $formvals[$c];
 
-    if ($c === 'birthday_as_week_year' && $raw !== '') {
-    if (preg_match('/^\d{4}-\d{2}$/', $raw)) {
-        $val  = $raw . '-01';   
+    if ($c === 'birthday_as_week_year') {
+    if ($raw !== '' && preg_match('/^\d{4}-\d{2}$/', $raw)) {
+        $val  = $raw . '-01';  // Convert to a valid DATE
         $type = 's';
     } else {
-        $val  = null;           
+        $val  = null;
         $type = 's';
     }
+    $assign[] = "`$c` = ?";
+    $types   .= $type;
+    $values[] = $val;
+    continue;
+}
 
-    } elseif ($c === 'favorite_week_of_year' && $raw !== '') {
+    elseif ($c === 'favorite_week_of_year' && $raw !== '') {
     if (preg_match('/^\d{4}-W(\d{2})$/', $raw, $m)) {
         $val  = (int)$m[1];     
         $type = 'i';
