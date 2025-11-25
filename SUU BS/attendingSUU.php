@@ -119,7 +119,7 @@ function get_form($num = 0) {
             print "<br>
                    <br>";
         }
-        print "<input type='hidden' name='pagenum' value='$num+1'>";
+        print "<input type='hidden' name='pagenum' value='".($num+1)."'>";
         print "<br>
                <br>";
         print "\t<input type='reset' value='Reset' id='reset'>\n";
