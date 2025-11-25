@@ -399,6 +399,7 @@ foreach ($cols as $c) {
 }
 
 }
+}
 function infer_mysqli_type(string $mysqlType, $value): string {
     $t = strtolower($mysqlType);
     if (preg_match('/\b(int|bit)\b/', $t))      return 'i';        
