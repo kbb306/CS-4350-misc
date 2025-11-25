@@ -17,8 +17,8 @@ if (!empty($_REQUEST['submission_id'])) {
 function get_form($num = 0) {
     global $currentSubmissionIdHex;
     if ($num > 4) {
-        header("location: studentinformation.php")
-            exit()
+        header("location: studentinformation.php");
+        exit();
     }
     $logs = array();
     $servername = "localhost";
@@ -51,7 +51,7 @@ function get_form($num = 0) {
             $var = $row["variable_name"];
             $text = $row["text_for_display"];
             $type = $row["html_input_selector"];
-            $pattern = $row["pattern"]
+            $pattern = $row["pattern"]; 
             if ($type == "text") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
@@ -315,7 +315,7 @@ function sql_upload() {
             $formvals[$k] = $v;           
         }
         else {
-            print "Match not found for $k"
+            print "Match not found for $k";
         }
     }
     if (!$formvals) { return; }
@@ -336,15 +336,10 @@ foreach ($cols as $c) {
         // Convert hex → 16 bytes for BINARY(16)
         $val  = hex2bin($raw);
         $type = 'b';
-
-    elseif ($c === 'birthday_as_month_year') {
-    if ($raw !== '' && preg_match('/^\d{4}-\d{2}$/', $raw)) {
-        $val  = $raw . '-01';  // Convert to a valid DATE
-        $type = 's';
-    } else {
-        $val  = null;
-        $type = 's';
     }
+    elseif ($c === 'birthday_as_month_year') {
+    
+
     $assign[] = "`$c` = ?";
     $types   .= $type;
     $values[] = $val;
@@ -399,7 +394,7 @@ foreach ($cols as $c) {
 }
 
 }
-}
+
 function infer_mysqli_type(string $mysqlType, $value): string {
     $t = strtolower($mysqlType);
     if (preg_match('/\b(int|bit)\b/', $t))      return 'i';        
