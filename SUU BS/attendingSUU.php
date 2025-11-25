@@ -119,18 +119,15 @@ function get_form($num = 0) {
             print "<br>
                    <br>";
         }
-        print "<input type='hidden' name='pagenum' value='".($num+1)."'>";
+        $nextPage = $num + 1;
+        print "<input type='hidden' name='pagenum' value='".($nextPage)."'>";
         print "<br>
                <br>";
         print "\t<input type='reset' value='Reset' id='reset'>\n";
         print "<br>
                <br>";
         print "\t<input type='submit' value='Submit' id='submit'>\n";
-        if ($num == 1) {
-            print "<input type='hidden' name='pagenum' value='".($num+1)."'>";
-            print "<br>
-                  <br>";
-        }
+      
         print "</form>";
     }
 }
@@ -369,7 +366,9 @@ foreach ($cols as $c) {
     $values[] = $val;
 }
 
-
+    if (empty($assign)) {
+    return;
+}
 
     $updates = [];
     foreach ($formvals as $c => $_) {
