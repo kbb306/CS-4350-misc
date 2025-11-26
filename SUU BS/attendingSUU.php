@@ -16,10 +16,6 @@ if (!empty($_REQUEST['submission_id'])) {
 
 function get_form($num = 0) {
     global $currentSubmissionIdHex;
-    if ($num > 4) {
-        header("location: studentinformation.php");
-        exit();
-    }
     $logs = array();
     $servername = "localhost";
     $username = "root";
@@ -70,9 +66,19 @@ function get_form($num = 0) {
             else if ($type == "number") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
+
             else if ($type == "email") {
-                print "\t<label for=$var>$text<input type=$type name=$var id=$var pattern=$pattern>\n";
+                if (!empty($pattern)) {
+                    print "\t<label for=\"$var\">$text"
+                    . "<input type=\"$type\" name=\"$var\" id=\"$var\" "
+                    . "pattern=\"" . htmlspecialchars($pattern, ENT_QUOTES) . "\">\n";
+                } 
+                else {
+                    print "\t<label for=\"$var\">$text" 
+                    . "<input type=\"$type\" name=\"$var\" id=\"$var\">\n";
+                }
             }
+
             else if ($type == "password") {
                 print "\t<label for=$var>$text<input type=$type name=$var id=$var>\n";
             }
@@ -312,63 +318,83 @@ function sql_upload() {
             $formvals[$k] = $v;           
         }
         else {
-            print "Match not found for $k";
+            //print "Match not found for $k";
         }
     }
     if (!$formvals) { return; }
 
-    $assign = [];
-    $types  = '';
-    $values = [];
+        // === Secret-code match check ===
+    // Only do this if these fields were submitted on this page.
+    if (isset($_REQUEST['secret_code']) && isset($_REQUEST['secret_code_verification'])) {
+
+        $code  = $_REQUEST['secret_code'];
+        $code2 = $_REQUEST['secret_code_verification'];
+
+        if ($code !== $code2) {
+            // Store an error message to display on Page 4
+            $_SESSION['secret_code_error'] = "Secret Code and Verify Secret Code must match.";
+
+            // IMPORTANT: Do NOT save anything for this page
+            // Just re-display Page 4 again
+            header("Location: attendingSUU.php?pagenum=4");
+            exit();
+        }
+    }
+
+
+$assign = [];
+$types  = '';
+$values = [];
 
 foreach ($cols as $c) {
+    // Only touch columns that actually have values in this request
     if (!array_key_exists($c, $formvals)) {
-        // If you want true default from schema for missing fields:
         continue;
     }
 
     $raw = $formvals[$c];
 
-    if ($c === 'submission_id') {
-        // Convert hex → 16 bytes for BINARY(16)
-        $val  = hex2bin($raw);
-        $type = 'b';
+    // 1) submission_id: hex string -> 16-byte binary for BINARY(16)
+
+
+    // 2) birthday_as_month_year: "YYYY-MM" -> "YYYY-MM-01" (valid DATE)
+     if ($c === 'birthday_as_month_year') {
+        if ($raw !== '' && preg_match('/^\d{4}-\d{2}$/', $raw)) {
+            $val = $raw . '-01';
+        } else {
+            $val = null;
+        }
+        $type = 's';
+
+    // 3) favorite_week_of_year: "YYYY-Www" -> week number (int)
+    } elseif ($c === 'favorite_week_of_year') {
+        if ($raw !== '' && preg_match('/^\d{4}-W(\d{2})$/', $raw, $m)) {
+            $val = (int)$m[1];      // 1–53
+        } else {
+            $val = 0;
+        }
+        $type = 'i';
+
+    // 4) Checkboxes: "on" / "off" -> 1 / 0
+    } elseif ($raw === 'on' || $raw === 'off') {
+        $val  = ($raw === 'on') ? 1 : 0;
+        $type = 'i';
+
+    // 5) Everything else: infer from MySQL column type
+    } else {
+        $val  = $raw;
+        $type = infer_mysqli_type($colTypes[$c] ?? '', $val);  // 'i','d','s','b'
     }
-    elseif ($c === 'birthday_as_month_year') {
-    
 
     $assign[] = "`$c` = ?";
     $types   .= $type;
     $values[] = $val;
-    continue;
 }
 
-    elseif ($c === 'favorite_week_of_year' && $raw !== '') {
-    if (preg_match('/^\d{4}-W(\d{2})$/', $raw, $m)) {
-        $val  = (int)$m[1];     
-        $type = 'i';
-    } else {
-        $val  = 0;              
-        $type = 'i';
-    }
-
-    // Normalize HTML checkbox strings to ints
-    if ($raw === 'on' || $raw === 'off') {
-        $val  = ($raw === 'on') ? 1 : 0;
-        $type = 'i';                    // booleans → integer bind
-    } else {
-        $val  = $raw;
-        $type = infer_mysqli_type($colTypes[$c] ?? '', $val);  // returns 'i'|'d'|'s'|'b'
-    }
-
-    $assign[] = "`$c` = ?";
-    $types   .= $type;   // APPEND exactly one letter for this one "?"
-    $values[] = $val;
+if (empty($assign)) {
+    return;   // nothing to insert/update
 }
 
-    if (empty($assign)) {
-    return;
-}
 
     $updates = [];
     foreach ($formvals as $c => $_) {
@@ -392,7 +418,7 @@ foreach ($cols as $c) {
     $conn->close();
 }
 
-}
+
 
 function infer_mysqli_type(string $mysqlType, $value): string {
     $t = strtolower($mysqlType);
@@ -402,15 +428,25 @@ function infer_mysqli_type(string $mysqlType, $value): string {
     return 's'; 
 }
 
-if (isSet($_REQUEST["pagenum"])) {
-$number = $_REQUEST["pagenum"];
-}
-else {
+if (isset($_REQUEST["pagenum"])) {
+    $number = (int)$_REQUEST["pagenum"];
+} else {
     $number = 1;
 }
-get_form($number);
+
+// First, save the data from the page that was just submitted
 sql_upload();
+
+// If we're past the last page (pagenum > 4), go to the summary page
+if ($number > 4) {
+    header("Location: studentinformation.php");
+    exit();
+}
+
+// Otherwise, show the next page in the wizard
+get_form($number);
 ?>  
 </body>
 </html>
+
 
