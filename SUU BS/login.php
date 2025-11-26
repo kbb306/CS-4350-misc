@@ -83,5 +83,6 @@
                     print "No id found with this info. Please return to signup page and try again/";
                 }
             }
+            ?>
     </body>
 </html>
