@@ -363,17 +363,10 @@ foreach ($cols as $c) {
     // 1) submission_id: hex string -> 16-byte binary for BINARY(16)
 
 
-    // 2) birthday_as_month_year: "YYYY-MM" -> "YYYY-MM-01" (valid DATE)
-     if ($c === 'birthday_as_month_year') {
-        if ($raw !== '' && preg_match('/^\d{4}-\d{2}$/', $raw)) {
-            $val = $raw . '-01';
-        } else {
-            $val = null;
-        }
-        $type = 's';
+    
 
     // 3) favorite_week_of_year: "YYYY-Www" -> week number (int)
-    } 
+    
     elseif ($c === 'favorite_week_of_year') {
         if ($raw !== '' && preg_match('/^\d{4}-W(\d{2})$/', $raw, $m)) {
             $val = (int)$m[1];      // 1–53

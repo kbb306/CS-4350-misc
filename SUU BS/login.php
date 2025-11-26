@@ -46,12 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sub_id = $row['submission_id'];  // BINARY(16)
 
             // Convert binary to hex for URL (to match how submission_id is normally passed)
-            $sub_hex = bin2hex($sub_id);
 
             $stmt->close();
             $conn->close();
 
-            header("Location: studentinformation.php?submission_id=" . urlencode($sub_hex));
+            header("Location: studentinformation.php?submission_id=" . urlencode($sub_id));
             exit();
         } else {
             $message = "No record found with this email + secret code. "
