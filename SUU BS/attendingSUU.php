@@ -377,7 +377,7 @@ foreach ($cols as $c) {
 
      elseif ($c === 'secret_code' || $c === 'secret_code_verification') {
         $val = hash($raw)
-        $type = 's';
+        $type = 's'
      }
 
     // 4) Checkboxes: "on" / "off" -> 1 / 0
