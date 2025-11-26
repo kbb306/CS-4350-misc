@@ -84,6 +84,13 @@
                         if ($var === "completed_registration") {
                             print "<ul>";
                         }
+
+                        if ($value === 1 || $value === "1") {
+                            $value = "Yes";
+                        }
+                        else {
+                            $value = "No";
+                        }
                             print "<li>" . htmlspecialchars($var) . ": " . htmlspecialchars($value) . "</li>";
 
                         if ($var === "paid_tuition") {

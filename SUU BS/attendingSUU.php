@@ -367,7 +367,7 @@ foreach ($cols as $c) {
 
     // 3) favorite_week_of_year: "YYYY-Www" -> week number (int)
     
-    elseif ($c === 'favorite_week_of_year') {
+    if ($c === 'favorite_week_of_year') {
         if ($raw !== '' && preg_match('/^\d{4}-W(\d{2})$/', $raw, $m)) {
             $val = (int)$m[1];      // 1–53
         } else {
