@@ -63,18 +63,7 @@
             return $cols;
         }
 
-        // Per-request/per-survey submission id (hex string)
-        $currentSubmissionIdHex = '';
-
-        if (!empty($_REQUEST['submission_id'])) {
-            $currentSubmissionIdHex = $_REQUEST['submission_id'];
-            data_dump($currentSubmissionIdHex);
-        } else {
-            header("Location: login.php");
-            exit();
-        }
-
-    function data_dump($currentSubmissionIdHex) {
+        function data_dump($currentSubmissionIdHex) {
         $columns = get_cols();
         $servername = "localhost";
         $username = "root";
@@ -106,9 +95,30 @@
                         print "<p>" . htmlspecialchars($var) . ": " . htmlspecialchars($value) . "</p>";
                     }
                     }
+                    $error = false;
+                }
+                else {
+                    $error = true;
                 }
             }
+            if ($error) {
+                print "<h1>Something went wrong and your data could not be retrived. Please try to sign up again</h1>";
+            }
         }
-    ?> 
+    
+
+        // Per-request/per-survey submission id (hex string)
+        $currentSubmissionIdHex = '';
+
+        if (!empty($_REQUEST['submission_id'])) {
+            $currentSubmissionIdHex = $_REQUEST['submission_id'];
+            data_dump($currentSubmissionIdHex);
+        } else {
+            header("Location: login.php");
+            exit();
+        }
+
+    
+    ?>
     </body>
 </html>     

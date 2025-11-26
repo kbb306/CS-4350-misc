@@ -1,9 +1,76 @@
+<?php
+// login.php
+
+// Optional: start session if you want it
+// session_start();
+
+$servername = "localhost";
+$username   = "root";
+$password   = "Legally18";
+$dbname     = "suubs";
+
+$message = "";  // for error messages shown under the form
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Only run DB logic on POST
+    $email    = $_POST['email']   ?? '';
+    $passwordRaw = $_POST['password'] ?? '';
+
+    if ($email !== '' && $passwordRaw !== '') {
+        $passwordHashed = hash("sha256", $passwordRaw);
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Use correct column name: school_email
+        $sql  = "SELECT submission_id FROM userdata 
+                 WHERE school_email = ? AND secret_code = ?";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        $stmt->bind_param("ss", $email, $passwordHashed);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if (!$result) {
+            die("Query failed: " . $conn->error);
+        }
+
+        if ($result->num_rows > 0) {
+            // Expect exactly one row
+            $row    = $result->fetch_assoc();
+            $sub_id = $row['submission_id'];  // BINARY(16)
+
+            // Convert binary to hex for URL (to match how submission_id is normally passed)
+            $sub_hex = bin2hex($sub_id);
+
+            $stmt->close();
+            $conn->close();
+
+            header("Location: studentinformation.php?submission_id=" . urlencode($sub_hex));
+            exit();
+        } else {
+            $message = "No record found with this email + secret code. "
+                     . "Please return to the signup page and try again.";
+        }
+
+        $stmt->close();
+        $conn->close();
+    } else {
+        $message = "Please fill in both fields.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Log in</title>
         <style>
-      /* Internal CSS  */
+            /* Internal CSS  */
             h1 {
                 color: #db0000;
                 font-size: 50px;
@@ -22,67 +89,50 @@
                 margin-left: auto;
             }
 
-        html{
-            background-color: #000000;
+            html {
+                background-color: #000000;
             }
 
-        form {
-            margin-top: auto ;
-            padding-top: 10%;
-            text-align: center;
-            color: #db0000;
-        }
+            form {
+                margin-top: auto;
+                padding-top: 10%;
+                text-align: center;
+                color: #db0000;
+            }
 
-        label br {
-            padding-inline: 8%;
-        }
+            label br {
+                padding-inline: 8%;
+            }
 
-        input {
-            padding-left: 3px;
-        }
-    </style>
+            input {
+                padding-left: 3px;
+            }
+
+            .error {
+                color: #db0000;
+                text-align: center;
+                margin-top: 1rem;
+            }
+        </style>
     </head>
     <body>
-        <p>If you are seeing this page, your submission ID was lost during signup. To recover it, please enter your SUU email and the secret code you created on the signup page</p>
-        <form action="login.php" method="post">
-            <label>Enter Email <input type="email" name = email></label>
-            <label>Enter Secret Code <input type="password" name="password"></label>
-        </form>
-        <?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "Legally18";
-            $dbname = "suubs";
-            $conn = new mysqli($servername, $username,$password,$dbname);
-            if ($conn->connect_error) {
-                die("Connection failed:".$conn->connect_error);
-            }
-            if (isset($_POST["email"],$_POST["password"])) {
-                $email = $_POST["email"];
-                $password $_POST["password"];
-                $go = true;
-            }
-            else {
-                $go = false;
-            }
-            if ($go) {
-                $sql = "SELECT submission_id FROM userdata WHERE school_mail = $email AND secret_code = $password"
-                $result = $conn -> query($sql);
-                if (!$result) {
-                    die("Something went wrong!");
-                }
-                if ($result -> num_rows > 0) {
-                    while ($row = $result -> fetch_assoc()) {
-                        $sub_id = $row['submission_id'];
-                    }
+        <p>If you are seeing this page, your submission ID was lost during signup.
+        To recover it, please enter your SUU email and the secret code you created on the signup page.</p>
 
-                    header("Location: studentinformation.php?submission_id=" . urlencode($sub_id));
-                    exit();
-                }
-                else {
-                    print "No id found with this info. Please return to signup page and try again/";
-                }
-            }
-            ?>
+        <form action="login.php" method="post">
+            <label>Enter Email
+                <input type="email" name="email" required>
+            </label>
+            <br><br>
+            <label>Enter Secret Code
+                <input type="password" name="password" required>
+            </label>
+            <br><br>
+            <button type="submit" value="submit">Submit</button>
+        </form>
+
+        <?php if ($message !== ""): ?>
+            <div class="error"><?= htmlspecialchars($message, ENT_QUOTES) ?></div>
+        <?php endif; ?>
     </body>
 </html>
