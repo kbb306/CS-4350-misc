@@ -38,6 +38,12 @@ function get_form($num = 0) {
     print "<body>";
     $sql = "SELECT * FROM user_inputs_for_all_pages WHERE page=$num ORDER BY page_order";
     $result = $conn->query($sql);
+    if ($num == 4 && isset($_SESSION['secret_code_error'])) {
+    print "<p style='color:red; font-weight:bold;'>"
+        . $_SESSION['secret_code_error'] .
+      "</p>";
+    unset($_SESSION['secret_code_error']);
+}
     print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
     print '<input type="hidden" name="submission_id" value="' 
     . htmlspecialchars($currentSubmissionIdHex, ENT_QUOTES) 
