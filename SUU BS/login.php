@@ -60,25 +60,28 @@
             if (isset($_POST["email"],$_POST["password"])) {
                 $email = $_POST["email"];
                 $password $_POST["password"];
+                $go = true;
             }
             else {
-                die("Email or Password submission failed");
+                $go = false;
             }
-            $sql = "SELECT submission_id FROM userdata WHERE school_mail = $email AND secret_code = $password"
-            $result = $conn -> query($sql);
-            if (!$result) {
-                die("Something went wrong!");
-            }
-            if ($result -> num_rows > 0) {
-                while ($row = $result -> fetch_assoc()) {
-                    $sub_id = $row['submission_id'];
+            if ($go) {
+                $sql = "SELECT submission_id FROM userdata WHERE school_mail = $email AND secret_code = $password"
+                $result = $conn -> query($sql);
+                if (!$result) {
+                    die("Something went wrong!");
                 }
+                if ($result -> num_rows > 0) {
+                    while ($row = $result -> fetch_assoc()) {
+                        $sub_id = $row['submission_id'];
+                    }
 
-                header("Location: studentinformation.php?submission_id=" . urlencode($sub_id));
-                exit();
-            }
-            else {
-                print "No id found with this info. Please return to signup page and try again/";
+                    header("Location: studentinformation.php?submission_id=" . urlencode($sub_id));
+                    exit();
+                }
+                else {
+                    print "No id found with this info. Please return to signup page and try again/";
+                }
             }
     </body>
 </html>
