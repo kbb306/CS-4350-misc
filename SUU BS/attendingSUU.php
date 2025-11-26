@@ -373,7 +373,8 @@ foreach ($cols as $c) {
         $type = 's';
 
     // 3) favorite_week_of_year: "YYYY-Www" -> week number (int)
-    } elseif ($c === 'favorite_week_of_year') {
+    } 
+    elseif ($c === 'favorite_week_of_year') {
         if ($raw !== '' && preg_match('/^\d{4}-W(\d{2})$/', $raw, $m)) {
             $val = (int)$m[1];      // 1–53
         } else {
@@ -381,18 +382,20 @@ foreach ($cols as $c) {
         }
         $type = 'i';
 
-     elseif ($c === 'secret_code' || $c === 'secret_code_verification') {
+    }
+    elseif ($c === 'secret_code' || $c === 'secret_code_verification') {
         $val = hash('sha256',$raw);
         $type = 's';
      }
 
     // 4) Checkboxes: "on" / "off" -> 1 / 0
-    } elseif ($raw === 'on' || $raw === 'off') {
+    elseif ($raw === 'on' || $raw === 'off') {
         $val  = ($raw === 'on') ? 1 : 0;
         $type = 'i';
 
     // 5) Everything else: infer from MySQL column type
-    } else {
+    } 
+    else {
         $val  = $raw;
         $type = infer_mysqli_type($colTypes[$c] ?? '', $val);  // 'i','d','s','b'
     }
