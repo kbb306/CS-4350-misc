@@ -45,18 +45,6 @@
 <body>
     <?php  
         session_start();
-
-        // Per-request/per-survey submission id (hex string)
-        $currentSubmissionIdHex = '';
-
-        if (!empty($_REQUEST['submission_id'])) {
-            // Coming back from a previous page: reuse the same id
-            $currentSubmissionIdHex = $_REQUEST['submission_id'];
-        } else {
-            // New survey (no submission_id in the request): make a new one
-            $currentSubmissionIdHex = bin2hex(random_bytes(16));
-        }
-
         function get_cols() {
             $servername = "localhost";
             $username = "root";
@@ -67,40 +55,60 @@
                 die("Connection failed:".$conn->connect_error);
             }
             $sql = "SHOW COLUMNS FROM userdata";
-            $cols = $conn -> query($sql);
+            $res = $conn -> query($sql);
+            $cols = [];
+            while ($row = $res -> fetch_assoc()) {
+                $cols[] = $row['Field'];
+            }
             return $cols;
         }
+
+        // Per-request/per-survey submission id (hex string)
+        $currentSubmissionIdHex = '';
+
+        if (!empty($_REQUEST['submission_id'])) {
+            $currentSubmissionIdHex = $_REQUEST['submission_id'];
+            data_dump($currentSubmissionIdHex);
+        } else {
+            header("Location: login.php");
+            exit();
+        }
+
+    function data_dump($currentSubmissionIdHex) {
         $columns = get_cols();
         $servername = "localhost";
         $username = "root";
         $password = "Legally18";
         $dbname = "suubs";
         $conn = new mysqli($servername, $username,$password,$dbname);
+        $subIdEsc = $conn->real_escape_string($currentSubmissionIdHex);
         foreach($columns as $var) {
-            $sql = "SELECT $var FROM userdata WHERE submission_id = $currentSubmissionIdHex";
-            $result = $conn -> $query($sql);
+            $sql = "SELECT $var FROM userdata WHERE submission_id = '$subIdEsc' ";
+            $result = $conn -> query($sql);
             if ($result -> num_rows > 0) {
                 while($row = $result -> fetch_assoc()) {
+                    $value = $row[$var];
                     if ($var === "secret_code_verification") {
                         continue;
                     }
-                    else if ($row === 0 || $row === 1) {
+                    else if ($value === "0" || $value === "1" || $value === 0 || $value === 1) {
                         if ($var === "completed_registration") {
                             print "<ul>";
                         }
-                        print "<li>" . $var . ": " . $row . "</li>"
+                            print "<li>" . htmlspecialchars($var) . ": " . htmlspecialchars($value) . "</li>";
+
                         if ($var === "paid_tuition") {
                             print "</ul>";
                         }
                     }
 
                     else {
-                        print "<p>" . $var . ": " . $row . "</p>";
+                        print "<p>" . htmlspecialchars($var) . ": " . htmlspecialchars($value) . "</p>";
                     }
                     }
                 }
             }
-        
+        }
     ?> 
     </body>
 </html>     

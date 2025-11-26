@@ -442,9 +442,13 @@ function infer_mysqli_type(string $mysqlType, $value): string {
     return 's'; 
 }
 
-if (isset($_REQUEST["pagenum"])) {
-    $number = (int)$_REQUEST["pagenum"];
-} else {
+if (isset($_POST['pagenum'])) {
+    $number = (int)$_POST['pagenum'];
+    } 
+elseif (isset($_GET['pagenum'])) {
+    $number = (int)$_GET['pagenum'];
+    } 
+else {
     $number = 1;
 }
 
@@ -453,7 +457,7 @@ sql_upload();
 
 // If we're past the last page (pagenum > 4), go to the summary page
 if ($number > 4) {
-    header("Location: studentinformation.php");
+    header("Location: studentinformation.php?submission_id=" . urlencode($currentSubmissionIdHex));
     exit();
 }
 
