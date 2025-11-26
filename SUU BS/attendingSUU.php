@@ -44,7 +44,7 @@ function get_form($num = 0) {
       "</p>";
     unset($_SESSION['secret_code_error']);
 }
-    print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='GET'>\n";
+    print "\t<form name=page_$num id=page_$num action='attendingSUU.php' method='POST'>\n";
     print '<input type="hidden" name="submission_id" value="' 
     . htmlspecialchars($currentSubmissionIdHex, ENT_QUOTES) 
     . '">';
@@ -382,7 +382,7 @@ foreach ($cols as $c) {
         $type = 'i';
 
      elseif ($c === 'secret_code' || $c === 'secret_code_verification') {
-        $val = hash($raw)
+        $val = hash('sha256',$raw)
         $type = 's'
      }
 
