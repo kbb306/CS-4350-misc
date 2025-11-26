@@ -382,8 +382,8 @@ foreach ($cols as $c) {
         $type = 'i';
 
      elseif ($c === 'secret_code' || $c === 'secret_code_verification') {
-        $val = hash('sha256',$raw)
-        $type = 's'
+        $val = hash('sha256',$raw);
+        $type = 's';
      }
 
     // 4) Checkboxes: "on" / "off" -> 1 / 0
